@@ -41,16 +41,16 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    StationState getNextState() const;
+    StationState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineStation& _context;
@@ -71,16 +71,16 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    StationState getNextState() const;
+    StationState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineStation& _context;
@@ -101,16 +101,16 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    StationState getNextState() const;
+    StationState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineStation& _context;
