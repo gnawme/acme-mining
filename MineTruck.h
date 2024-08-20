@@ -34,6 +34,9 @@ public:
     const char* getName() const override;
 
     ///
+    TruckState getTruckState() const;
+
+    ///
     void setTruckState(TruckState);
 
     ///

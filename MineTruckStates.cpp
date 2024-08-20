@@ -24,6 +24,11 @@ void MineTruckMining::enterState() {
 }
 
 ///
+TruckState MineTruckMining::getState() const {
+    return TruckState::MINING;
+}
+
+///
 TruckState MineTruckMining::getNextState() const {
     return TruckState::INBOUND;
 }
@@ -63,6 +68,11 @@ void MineTruckInbound::enterState() {
     auto* mineStation =
         MineRegistry::getInstance().getStationDispatcher()->getNextAvailableStation();
     _context.assignMineStation(mineStation);
+}
+
+///
+TruckState MineTruckInbound::getState() const {
+    return TruckState::INBOUND;
 }
 
 ///
@@ -106,6 +116,11 @@ void MineTruckQueued::enterState() {
 }
 
 ///
+TruckState MineTruckQueued::getState() const {
+    return TruckState::QUEUED;
+}
+
+///
 TruckState MineTruckQueued::getNextState() const {
     return TruckState::UNLOADING;
 }
@@ -140,6 +155,11 @@ MineTruckUnloading::MineTruckUnloading(MineTruck& context)
 /// \param duration
 void MineTruckUnloading::enterState() {
     _duration = TRUCK_UNLOADING_TIME;
+}
+
+///
+TruckState MineTruckUnloading::getState() const {
+    return TruckState::UNLOADING;
 }
 
 ///
@@ -178,6 +198,11 @@ void MineTruckOutbound::enterState() {
     auto* mineSite = MineRegistry::getInstance().getSiteDispatcher()->getNextAvailableMine();
     _context.assignMineSite(mineSite);
     _duration = TRUCK_TRANSIT_TIME;
+}
+
+///
+TruckState MineTruckOutbound::getState() const {
+    return TruckState::OUTBOUND;
 }
 
 ///

@@ -24,6 +24,7 @@ class MineTruckState {
 public:
     virtual ~MineTruckState() = default;
     virtual void enterState() = 0;
+    virtual TruckState getState() const = 0;
     virtual TruckState getNextState() const = 0;
     virtual const char* getStateName() const = 0;
     virtual void update(const std::string&) = 0;
@@ -44,16 +45,19 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    TruckState getNextState() const;
+    TruckState getState() const override;
+
+    ///
+    TruckState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineTruck& _context;
@@ -74,16 +78,19 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    TruckState getNextState() const;
+    TruckState getState() const override;
+
+    ///
+    TruckState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineTruck& _context;
@@ -104,16 +111,19 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    TruckState getNextState() const;
+    TruckState getState() const override;
+
+    ///
+    TruckState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineTruck& _context;
@@ -134,16 +144,19 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    TruckState getNextState() const;
+    TruckState getState() const override;
+
+    ///
+    TruckState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineTruck& _context;
@@ -164,16 +177,19 @@ public:
 
     /// Sets up conditions when the state is entered
     /// \param duration
-    void enterState();
+    void enterState() override;
 
     ///
-    TruckState getNextState() const;
+    TruckState getState() const override;
+
+    ///
+    TruckState getNextState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
 
     ///
-    void update(const std::string&);
+    void update(const std::string&) override;
 
 private:
     MineTruck& _context;
