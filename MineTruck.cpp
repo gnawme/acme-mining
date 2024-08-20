@@ -47,6 +47,12 @@ const char* MineTruck::getName() const {
     return _truckName.c_str();
 }
 
+TruckState MineTruck::getTruckState() const {
+    return _currentState->getState();
+}
+
+///
+/// \param truckState
 void MineTruck::setTruckState(TruckState truckState) {
     _currentState = _truckStates[truckState].get();
     _currentState->enterState();

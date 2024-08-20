@@ -11,7 +11,11 @@ find_package(GTest REQUIRED)
 # Define source files
 set(SIM_SOURCE
         AcmeMinerSim.cpp
+        AcmeMinerUtils.cpp
+        AcmeMinerUtils.h
         MineDefs.h
+        MineDispatchers.cpp
+        MineDispatchers.h
         MineLogger.h
         MineOverlord.cpp
         MineOverlord.h
@@ -19,13 +23,11 @@ set(SIM_SOURCE
         MineSite.h
         MineStation.cpp
         MineStation.h
+        MineStationState.cpp
+        MineStationState.h
         MineTimer.h
         MineTruck.cpp
         MineTruck.h
-        AcmeMinerUtils.cpp
-        AcmeMinerUtils.h
-        MineDispatchers.cpp
-        MineDispatchers.h
         MineTruckStates.cpp
         MineTruckStates.h
 )

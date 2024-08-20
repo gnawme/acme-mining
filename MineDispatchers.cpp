@@ -17,7 +17,7 @@ MineSite* SiteDispatcher::getNextAvailableMine() {
     return mineSite;
 }
 
-/// Pushes a MineStation and resort the priority queue
+/// Pushes a MineStation and resorts the priority queue
 /// \param mineStation
 void StationDispatcher::enqueue(MineStation* mineStation) {
     _stationQueue.push(mineStation);

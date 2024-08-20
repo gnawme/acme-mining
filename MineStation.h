@@ -1,6 +1,7 @@
 /// \file   MineStation.h
 #pragma once
 #include "MineOverlord.h"
+#include "MineStationState.h"
 
 #include <queue>
 #include <string>
@@ -18,10 +19,22 @@ public:
     ~MineStation() override = default;
 
     ///
+    MineTruck* dequeue();
+
+    ///
+    void enqueue(MineTruck*);
+
+    ///
+    MineTruck* front();
+
+    ///
     const char* getName() const override;
 
     ///
     std::size_t getQueueSize() const;
+
+    ///
+    void setStationState(StationState);
 
     ///
     void update(const std::string& timestamp) override;
@@ -29,6 +42,9 @@ public:
 private:
     std::string _stationName;
     std::string _timestamp;
-    std::queue<MineTruck*> _myQueue;
+    StationStateMap _stationStates;
+
+    MineStationState* _currentState{nullptr};
+    std::queue<MineTruck*> _truckQueue;
 };
 }  // namespace acme
