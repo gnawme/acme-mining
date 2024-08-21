@@ -37,6 +37,9 @@ public:
     TruckState getTruckState() const;
 
     ///
+    void outputStatistics(const std::string& timestamp) override;
+
+    ///
     void setTruckState(TruckState);
 
     ///

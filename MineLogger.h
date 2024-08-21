@@ -1,6 +1,7 @@
 /// \file   MineLogger.h
 /// \brief  Simple logging singleton
 #pragma once
+#include "AcmeMinerUtils.h"
 
 #include <fstream>
 #include <iostream>
@@ -19,12 +20,10 @@ public:
 
     ///
     void logMessage(const std::string& msg) {
-        if (!_logToFile) {
-            std::clog << msg << std::endl;
-        } else {
-            std::lock_guard<std::mutex> lockGuard(_mutex);
-            _logfile << msg << std::endl;
-        }
+        std::clog << msg << std::endl;
+
+        std::lock_guard<std::mutex> lockGuard(_mutex);
+        _logfile << msg << std::endl;
     }
 
     ///
@@ -33,23 +32,19 @@ public:
 
 private:
     ///
-    MineLogger(bool logToFile = false) {
-        if (_logToFile) {
-            const char ACME_LOG[]{"AcmeMinerSim.log"};
-            _logfile.open(ACME_LOG, std::ios::app);
-        }
+    MineLogger() {
+        auto dateStamp = createISODateStamp();
+        std::string acmeLog(dateStamp + "_AcmeMinerSim.log");
+        _logfile.open(acmeLog, std::ios::app);
     };
 
     ///
     ~MineLogger() {
-        if (_logToFile) {
-            if (_logfile.is_open()) {
-                _logfile.close();
-            }
+        if (_logfile.is_open()) {
+            _logfile.close();
         }
     }
 
-    bool _logToFile{false};
     std::mutex _mutex;
     std::ofstream _logfile;
 };

@@ -7,7 +7,6 @@
 
 #include <gtest/gtest.h>
 
-#include <iostream>
 #include <memory>
 
 using namespace acme;
@@ -60,11 +59,23 @@ struct AcmeMinerTest : public ::testing::Test {
     MineSite* myMineSiteC{nullptr};
 };
 
-///
+/// Tests that the Mine
 TEST_F(AcmeMinerTest, InstantiatingMineTimerWithDefaultValuesShouldWork) {
     auto duration1 = (*myMineTimer)();
+    EXPECT_TRUE(duration1 >= H3_MINING_MIN && duration1 <= H3_MINING_MAX);
+
     auto duration2 = (*myMineTimer)();
+    EXPECT_TRUE(duration2 >= H3_MINING_MIN && duration2 <= H3_MINING_MAX);
     EXPECT_NE(duration1, duration2);
+
+    duration1 = (*myMineTimer)();
+    EXPECT_TRUE(duration1 >= H3_MINING_MIN && duration1 <= H3_MINING_MAX);
+    for (auto i = 0; i < 10; ++i) {
+        duration2 = (*myMineTimer)();
+        EXPECT_TRUE(duration2 >= H3_MINING_MIN && duration2 <= H3_MINING_MAX);
+        EXPECT_NE(duration1, duration2);
+        duration1 = duration2;
+    }
 }
 
 /// Tests that the MineStation min heap works properly

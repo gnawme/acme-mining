@@ -16,6 +16,9 @@ public:
     virtual const char* getName() const = 0;
 
     ///
+    virtual void outputStatistics(const std::string& timestamp) = 0;
+
+    ///
     virtual void update(const std::string& timestamp) = 0;
 };
 
@@ -31,6 +34,9 @@ public:
 
     ///
     void notify(const std::string& timestamp);
+
+    ///
+    void outputStatistics();
 
     ///
     void run();

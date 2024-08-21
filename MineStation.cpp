@@ -1,6 +1,8 @@
 /// \file   MineStation.cpp
 #include "MineStation.h"
 
+#include <fstream>
+
 namespace acme {
 ///
 /// \param name
@@ -40,6 +42,21 @@ std::size_t MineStation::getQueueSize() const {
 ///
 const char* MineStation::getName() const {
     return _stationName.c_str();
+}
+
+///
+/// \param timestamp
+void MineStation::outputStatistics(const std::string& timestamp) {
+    std::string mineStationOutput("MineStation_" + timestamp + ".csv");
+    std::ofstream stationOutput(mineStationOutput, std::ios::app);
+
+    stationOutput << getName() << ",";
+    _stationStates[StationState::IDLE]->outputStatistics(stationOutput);
+    stationOutput << ",";
+    _stationStates[StationState::READY]->outputStatistics(stationOutput);
+    stationOutput << ",";
+    _stationStates[StationState::UNLOADING]->outputStatistics(stationOutput);
+    stationOutput << std::endl;
 }
 
 ///

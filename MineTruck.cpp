@@ -1,6 +1,7 @@
 /// \file   MineTruck.cpp
 #include "MineTruck.h"
 
+#include <fstream>
 #include <iostream>
 #include <memory>
 
@@ -49,6 +50,25 @@ const char* MineTruck::getName() const {
 
 TruckState MineTruck::getTruckState() const {
     return _currentState->getState();
+}
+
+///
+/// \param timestamp
+void MineTruck::outputStatistics(const std::string& timestamp) {
+    std::string mineTruckOutput("MineTruck_" + timestamp + ".csv");
+    std::ofstream truckOutput(mineTruckOutput, std::ios::app);
+
+    truckOutput << getName() << ",";
+    _truckStates[TruckState::MINING]->outputStatistics(truckOutput);
+    truckOutput << ",";
+    _truckStates[TruckState::INBOUND]->outputStatistics(truckOutput);
+    truckOutput << ",";
+    _truckStates[TruckState::QUEUED]->outputStatistics(truckOutput);
+    truckOutput << ",";
+    _truckStates[TruckState::UNLOADING]->outputStatistics(truckOutput);
+    truckOutput << ",";
+    _truckStates[TruckState::OUTBOUND]->outputStatistics(truckOutput);
+    truckOutput << std::endl;
 }
 
 ///

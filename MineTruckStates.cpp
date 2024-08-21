@@ -20,6 +20,7 @@ MineTruckMining::MineTruckMining(MineTruck& context)
 /// \param duration
 void MineTruckMining::enterState() {
     auto* mineSite = _context.getAssignedMineSite();
+    mineSite->setMiningFlag(true);
     _duration = mineSite->getMiningDuration();
 }
 
@@ -38,6 +39,11 @@ const char* MineTruckMining::getStateName() const {
     return TRUCK_STATE_NAME[TruckState::MINING];
 }
 
+///
+void MineTruckMining::outputStatistics(std::ofstream& truckOutput) {
+    truckOutput << _timeInState << ",";
+}
+
 /// Updates the state with the context
 void MineTruckMining::update(const std::string& timestamp) {
     if (_duration % 5 == 0 || _duration < 5) {
@@ -51,6 +57,7 @@ void MineTruckMining::update(const std::string& timestamp) {
     --_duration;
 
     if (_duration == 0) {
+        // Place MineSite on available queue
         MineRegistry::getInstance().getSiteDispatcher()->enqueue(_context.getAssignedMineSite());
         _context.setTruckState(getNextState());
     }
@@ -68,6 +75,7 @@ void MineTruckInbound::enterState() {
     auto* mineStation =
         MineRegistry::getInstance().getStationDispatcher()->getNextAvailableStation();
     _context.assignMineStation(mineStation);
+    _context.getAssignedMineSite()->setMiningFlag(false);
 }
 
 ///
@@ -83,6 +91,11 @@ TruckState MineTruckInbound::getNextState() const {
 /// Gets the text of the state name
 const char* MineTruckInbound::getStateName() const {
     return TRUCK_STATE_NAME[TruckState::INBOUND];
+}
+
+///
+void MineTruckInbound::outputStatistics(std::ofstream& truckOutput) {
+    truckOutput << _timeInState << ",";
 }
 
 /// Updates the state with the context
@@ -131,6 +144,11 @@ const char* MineTruckQueued::getStateName() const {
     return TRUCK_STATE_NAME[TruckState::QUEUED];
 }
 
+///
+void MineTruckQueued::outputStatistics(std::ofstream& truckOutput) {
+    truckOutput << _timeInState << ",";
+}
+
 /// Updates the state with the context
 void MineTruckQueued::update(const std::string& timestamp) {
     if (_duration == 0) {
@@ -171,6 +189,11 @@ TruckState MineTruckUnloading::getNextState() const {
 /// Gets the text of the state name
 const char* MineTruckUnloading::getStateName() const {
     return TRUCK_STATE_NAME[TruckState::UNLOADING];
+}
+
+///
+void MineTruckUnloading::outputStatistics(std::ofstream& truckOutput) {
+    truckOutput << _timeInState << ",";
 }
 
 /// Updates the state with the context
@@ -215,6 +238,11 @@ TruckState MineTruckOutbound::getNextState() const {
 /// Gets the text of the state name
 const char* MineTruckOutbound::getStateName() const {
     return TRUCK_STATE_NAME[TruckState::OUTBOUND];
+}
+
+///
+void MineTruckOutbound::outputStatistics(std::ofstream& truckOutput) {
+    truckOutput << _timeInState << ",";
 }
 
 /// Updates the state with the context

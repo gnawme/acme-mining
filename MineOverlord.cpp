@@ -1,6 +1,7 @@
 /// \file   MineOverlord.cpp
 #include "MineOverlord.h"
 
+#include "AcmeMinerUtils.h"
 #include "MineDefs.h"
 
 #include <chrono>
@@ -26,6 +27,14 @@ int MineOverlord::getNumMinions() const {
 void MineOverlord::notify(const std::string& timestamp) {
     for (auto* minion : _minions) {
         minion->update(timestamp);
+    }
+}
+
+///
+void MineOverlord::outputStatistics() {
+    auto timestamp = createISODateStamp();
+    for (auto* minion : _minions) {
+        minion->outputStatistics(timestamp);
     }
 }
 

@@ -34,6 +34,9 @@ public:
     std::size_t getQueueSize() const;
 
     ///
+    void outputStatistics(const std::string& timestamp) override;
+
+    ///
     void setStationState(StationState);
 
     ///

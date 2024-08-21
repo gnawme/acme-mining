@@ -5,6 +5,8 @@
 #include "MineStation.h"
 #include "MineTruck.h"
 
+#include <fstream>
+
 namespace acme {
 ///
 /// \param context
@@ -25,6 +27,11 @@ StationState MineStationIdle::getNextState() const {
 /// Gets the text of the state name
 const char* MineStationIdle::getStateName() const {
     return STATION_STATE_NAME[StationState::IDLE];
+}
+
+///
+void MineStationIdle::outputStatistics(std::ofstream& stationOutput) {
+    stationOutput << _timeInState << ",";
 }
 
 /// Updates the state with the context
@@ -56,6 +63,11 @@ StationState MineStationReady::getNextState() const {
 /// Gets the text of the state name
 const char* MineStationReady::getStateName() const {
     return STATION_STATE_NAME[StationState::READY];
+}
+
+///
+void MineStationReady::outputStatistics(std::ofstream& stationOutput) {
+    stationOutput << _timeInState << ",";
 }
 
 /// Updates the state with the context
@@ -94,6 +106,11 @@ StationState MineStationUnloading::getNextState() const {
 /// Gets the text of the state name
 const char* MineStationUnloading::getStateName() const {
     return STATION_STATE_NAME[StationState::UNLOADING];
+}
+
+///
+void MineStationUnloading::outputStatistics(std::ofstream& stationOutput) {
+    stationOutput << _timeInState << ",";
 }
 
 /// Updates the state with the context

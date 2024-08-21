@@ -4,6 +4,8 @@
 
 #include "MineTimer.h"
 
+#include <fstream>
+
 namespace acme {
 ///
 /// \param name
@@ -25,7 +27,25 @@ const char* MineSite::getName() const {
 
 ///
 /// \param timestamp
+void MineSite::outputStatistics(const std::string& timestamp) {
+    std::string mineSiteOutput("MineSite_" + timestamp + ".csv");
+    std::ofstream siteOutput(mineSiteOutput, std::ios::app);
+    siteOutput << getName() << "," << _idleCount << "," << _miningCount << std::endl;
+}
+
+///
+void MineSite::setMiningFlag(bool beingMined) {
+    _beingMined = beingMined;
+}
+
+///
+/// \param timestamp
 void MineSite::update(const std::string& timestamp) {
     _timestamp = timestamp;
+    if (_beingMined) {
+        ++_miningCount;
+    } else {
+        ++_idleCount;
+    }
 };
 }  // namespace acme

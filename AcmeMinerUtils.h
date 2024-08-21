@@ -1,8 +1,12 @@
 /// \file   AcmeMinerUtils
 #pragma once
+#include <string>
 
 namespace acme {
 class MineOverlord;
+///
+std::string createISODateStamp();
+
 ///
 const char* genMinionName(const char* prefix, int serial);
 

@@ -5,18 +5,35 @@
 #include "MineSite.h"
 #include "MineTruck.h"
 
+#include <chrono>
 #include <iomanip>
 #include <sstream>
 
 namespace acme {
+/// Creates an ISO date stamp for stats output files
+std::string createISODateStamp() {
+    // Get the current time as a time_point
+    auto now = std::chrono::system_clock::now();
+
+    // Convert to a time_t, which represents the time in seconds
+    std::time_t timeNow = std::chrono::system_clock::to_time_t(now);
+
+    // Use an ostringstream to format the date stamp
+    std::ostringstream oss;
+    oss << std::put_time(std::localtime(&timeNow), "%Y-%m-%dT%H-%M-%S");
+
+    // Return the formatted string
+    return oss.str();
+}
+
 /// Generates a standard name for a MineMinion
 /// \param prefix
 /// \param serial
 /// \return
 const char* genMinionName(const char* prefix, int serial) {
-    std::stringstream ss;
-    ss << prefix << "-" << std::setw(6) << std::setfill('0') << serial;
-    return ss.str().c_str();
+    std::ostringstream oss;
+    oss << prefix << "-" << std::setw(6) << std::setfill('0') << serial;
+    return oss.str().c_str();
 }
 
 /// Instantiates all MineSite instances and attaches them as Observers

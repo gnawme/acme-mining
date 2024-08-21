@@ -1,5 +1,6 @@
 /// \file   MineTruckStates.h
 #pragma once
+#include <iosfwd>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -27,6 +28,7 @@ public:
     virtual TruckState getState() const = 0;
     virtual TruckState getNextState() const = 0;
     virtual const char* getStateName() const = 0;
+    virtual void outputStatistics(std::ofstream&) = 0;
     virtual void update(const std::string&) = 0;
 };
 
@@ -55,6 +57,9 @@ public:
 
     /// Gets the text of the state name
     const char* getStateName() const override;
+
+    ///
+    void outputStatistics(std::ofstream&) override;
 
     ///
     void update(const std::string&) override;
@@ -90,6 +95,9 @@ public:
     const char* getStateName() const override;
 
     ///
+    void outputStatistics(std::ofstream&) override;
+
+    ///
     void update(const std::string&) override;
 
 private:
@@ -121,6 +129,9 @@ public:
 
     /// Gets the text of the state name
     const char* getStateName() const override;
+
+    ///
+    void outputStatistics(std::ofstream&) override;
 
     ///
     void update(const std::string&) override;
@@ -156,6 +167,9 @@ public:
     const char* getStateName() const override;
 
     ///
+    void outputStatistics(std::ofstream&) override;
+
+    ///
     void update(const std::string&) override;
 
 private:
@@ -187,6 +201,9 @@ public:
 
     /// Gets the text of the state name
     const char* getStateName() const override;
+
+    ///
+    void outputStatistics(std::ofstream&) override;
 
     ///
     void update(const std::string&) override;
