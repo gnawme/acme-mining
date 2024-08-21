@@ -90,7 +90,8 @@ void MineTruckInbound::update(const std::string& timestamp) {
     if (_duration % 5 == 0 || _duration < 5) {
         std::ostringstream oss;
         oss << timestamp << " : Truck ";
-        oss << _context.getName() << " INBOUND   to " << _context.getAssignedMineStation()->getName();
+        oss << _context.getName() << " INBOUND   to "
+            << _context.getAssignedMineStation()->getName();
         oss << ", remaining duration " << (_duration * TICK_DURATION) << " minutes";
         MineLogger::getInstance().logMessage(oss.str());
     }
