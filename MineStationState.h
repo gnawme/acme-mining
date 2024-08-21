@@ -23,6 +23,7 @@ public:
     virtual ~MineStationState() = default;
     virtual void enterState() = 0;
     virtual StationState getNextState() const = 0;
+    virtual StationState getState() const = 0;
     virtual const char* getStateName() const = 0;
     virtual void outputStatistics(std::ofstream&) = 0;
     virtual void update(const std::string&) = 0;
@@ -47,6 +48,9 @@ public:
 
     ///
     StationState getNextState() const override;
+
+    ///
+    StationState getState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;
@@ -81,6 +85,9 @@ public:
     ///
     StationState getNextState() const override;
 
+    ///
+    StationState getState() const override;
+
     /// Gets the text of the state name
     const char* getStateName() const override;
 
@@ -113,6 +120,9 @@ public:
 
     ///
     StationState getNextState() const override;
+
+    ///
+    StationState getState() const override;
 
     /// Gets the text of the state name
     const char* getStateName() const override;

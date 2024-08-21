@@ -6,6 +6,8 @@
 #include <memory>
 
 namespace acme {
+bool MineTruck::_initial = true;
+
 ///
 /// \param name
 MineTruck::MineTruck(const char* name)
@@ -55,8 +57,12 @@ TruckState MineTruck::getTruckState() const {
 ///
 /// \param timestamp
 void MineTruck::outputStatistics(const std::string& timestamp) {
-    std::string mineTruckOutput("MineTruck_" + timestamp + ".csv");
+    std::string mineTruckOutput(timestamp + "_MineTruck" + ".csv");
     std::ofstream truckOutput(mineTruckOutput, std::ios::app);
+
+    if (MineTruck::_initial) {
+        truckOutput << "Truck,Mining,Inbound,Queued,Unloading,Outbound" << std::endl;
+    }
 
     truckOutput << getName() << ",";
     _truckStates[TruckState::MINING]->outputStatistics(truckOutput);

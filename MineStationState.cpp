@@ -2,10 +2,13 @@
 #include "MineStationState.h"
 
 #include "MineDefs.h"
+#include "MineDispatchers.h"
+#include "MineLogger.h"
 #include "MineStation.h"
 #include "MineTruck.h"
 
 #include <fstream>
+#include <sstream>
 
 namespace acme {
 ///
@@ -24,6 +27,11 @@ StationState MineStationIdle::getNextState() const {
     return StationState::READY;
 }
 
+///
+StationState MineStationIdle::getState() const {
+    return StationState::IDLE;
+}
+
 /// Gets the text of the state name
 const char* MineStationIdle::getStateName() const {
     return STATION_STATE_NAME[StationState::IDLE];
@@ -31,15 +39,13 @@ const char* MineStationIdle::getStateName() const {
 
 ///
 void MineStationIdle::outputStatistics(std::ofstream& stationOutput) {
-    stationOutput << _timeInState << ",";
+    stationOutput << _timeInState;
 }
 
 /// Updates the state with the context
 void MineStationIdle::update(const std::string& timestamp) {
     ++_timeInState;
-    --_duration;
-
-    if (_duration == 0) {
+    if (_context.getQueueSize() != 0) {
         _context.setStationState(getNextState());
     }
 }
@@ -60,6 +66,11 @@ StationState MineStationReady::getNextState() const {
     return StationState::UNLOADING;
 }
 
+///
+StationState MineStationReady::getState() const {
+    return StationState::READY;
+}
+
 /// Gets the text of the state name
 const char* MineStationReady::getStateName() const {
     return STATION_STATE_NAME[StationState::READY];
@@ -67,18 +78,23 @@ const char* MineStationReady::getStateName() const {
 
 ///
 void MineStationReady::outputStatistics(std::ofstream& stationOutput) {
-    stationOutput << _timeInState << ",";
+    stationOutput << _timeInState;
 }
 
 /// Updates the state with the context
 void MineStationReady::update(const std::string& timestamp) {
     ++_timeInState;
-    --_duration;
 
     bool queued =
         ((_context.getQueueSize() != 0)
-         && (_context.front()->getTruckState() != TruckState::INBOUND));
-    if (_duration == 0 || queued) {
+         && (_context.front()->getTruckState() != TruckState::QUEUED));
+
+    if (queued) {
+        std::ostringstream oss;
+        oss << timestamp << " : Station ";
+        oss << _context.getName() << " READY     with " << _context.getQueueSize() << " in queue";
+        MineLogger::getInstance().logMessage(oss.str());
+    } else {
         _context.setStationState(getNextState());
     }
 }
@@ -91,7 +107,7 @@ MineStationUnloading::MineStationUnloading(MineStation& context)
 /// Sets up conditions when the state is entered
 /// \param duration
 void MineStationUnloading::enterState() {
-    _duration = 0;
+    _duration = TRUCK_UNLOADING_TIME;
 }
 
 ///
@@ -103,6 +119,11 @@ StationState MineStationUnloading::getNextState() const {
     }
 }
 
+///
+StationState MineStationUnloading::getState() const {
+    return StationState::UNLOADING;
+}
+
 /// Gets the text of the state name
 const char* MineStationUnloading::getStateName() const {
     return STATION_STATE_NAME[StationState::UNLOADING];
@@ -110,7 +131,7 @@ const char* MineStationUnloading::getStateName() const {
 
 ///
 void MineStationUnloading::outputStatistics(std::ofstream& stationOutput) {
-    stationOutput << _timeInState << ",";
+    stationOutput << _timeInState;
 }
 
 /// Updates the state with the context
@@ -119,7 +140,15 @@ void MineStationUnloading::update(const std::string& timestamp) {
     --_duration;
 
     if (_duration == 0) {
-        _context.dequeue();
+        // Remove the MineTruck from the queue, and requeue the MineStation
+        auto* mineTruck = _context.dequeue();
+        auto stationDispatcher = MineRegistry::getInstance().getStationDispatcher();
+        stationDispatcher->enqueue(&_context);
+
+        std::ostringstream oss;
+        oss << timestamp << " : Station ";
+        oss << _context.getName() << " UNLOADING truck " << mineTruck->getName();
+        MineLogger::getInstance().logMessage(oss.str());
         _context.setStationState(getNextState());
     }
 }

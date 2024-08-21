@@ -42,7 +42,6 @@ public:
     void run();
 
 private:
-    std::string tickToTimestamp(int tick);
     std::vector<MineMinion*> _minions;
 };
 }  // namespace acme

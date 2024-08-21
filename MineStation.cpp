@@ -4,6 +4,8 @@
 #include <fstream>
 
 namespace acme {
+bool MineStation::_initial = true;
+
 ///
 /// \param name
 MineStation::MineStation(const char* name)
@@ -45,10 +47,20 @@ const char* MineStation::getName() const {
 }
 
 ///
+StationState MineStation::getState() const {
+    return _currentState->getState();
+}
+
+///
 /// \param timestamp
 void MineStation::outputStatistics(const std::string& timestamp) {
-    std::string mineStationOutput("MineStation_" + timestamp + ".csv");
+    std::string mineStationOutput(timestamp + "_MineStation" + ".csv");
     std::ofstream stationOutput(mineStationOutput, std::ios::app);
+
+    if (MineStation::_initial) {
+        stationOutput << "Station,Idle,Ready,Unloading" << std::endl;
+        MineStation::_initial = false;
+    }
 
     stationOutput << getName() << ",";
     _stationStates[StationState::IDLE]->outputStatistics(stationOutput);
@@ -70,5 +82,6 @@ void MineStation::setStationState(StationState truckState) {
 /// \param timestamp
 void MineStation::update(const std::string& timestamp) {
     _timestamp = timestamp;
+    _currentState->update(_timestamp);
 };
 }  // namespace acme

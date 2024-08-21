@@ -33,6 +33,7 @@ public:
     void update(const std::string& timestamp) override;
 
 private:
+    static bool _initial;
     std::string _siteName;
     std::string _timestamp;
     std::unique_ptr<MineTimer> _timer;

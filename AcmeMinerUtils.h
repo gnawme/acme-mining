@@ -21,4 +21,7 @@ void instantiateTrucks(MineOverlord& overlord, int numTrucks);
 
 ///
 void startTrucksAtMines();
+
+///
+std::string tickToTimestamp(int tick);
 }  // namespace acme

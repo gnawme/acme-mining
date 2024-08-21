@@ -46,6 +46,7 @@ public:
     void update(const std::string& timestamp) override;
 
 private:
+    static bool _initial;
     std::string _truckName;
     std::string _timestamp;
     TruckStateMap _truckStates;

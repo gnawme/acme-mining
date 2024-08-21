@@ -1,5 +1,6 @@
 /// \file   AcmeMinerTest.cpp
 /// \brief  Unit tests for various Mine constructs
+#include "AcmeMinerUtils.h"
 #include "MineDispatchers.h"
 #include "MineSite.h"
 #include "MineTimer.h"
@@ -7,6 +8,7 @@
 
 #include <gtest/gtest.h>
 
+#include <iostream>
 #include <memory>
 
 using namespace acme;
@@ -17,16 +19,16 @@ struct AcmeMinerTest : public ::testing::Test {
     void SetUp() override {
         myMineTimer = new MineTimer(H3_MINING_MIN, H3_MINING_MAX);
 
-        myMineTruckA = new MineTruck("TRUCK_A");
-        myMineTruckB = new MineTruck("TRUCK_B");
-        myMineTruckC = new MineTruck("TRUCK_C");
+        myMineTruckA = new MineTruck("ATRK-00000A");
+        myMineTruckB = new MineTruck("ATRK-00000B");
+        myMineTruckC = new MineTruck("ATRK-00000C");
 
-        myMineStation1 = new MineStation("STATION_1");
-        myMineStation2 = new MineStation("STATION_2");
+        myMineStation1 = new MineStation("ASTN-000001");
+        myMineStation2 = new MineStation("ASTN-000001");
 
-        myMineSiteA = new MineSite("SITE_A");
-        myMineSiteB = new MineSite("SITE_A");
-        myMineSiteC = new MineSite("SITE_A");
+        myMineSiteA = new MineSite("ASIT-00000A");
+        myMineSiteB = new MineSite("ASIT-00000B");
+        myMineSiteC = new MineSite("ASIT-00000C");
     }
 
     ///
@@ -59,7 +61,8 @@ struct AcmeMinerTest : public ::testing::Test {
     MineSite* myMineSiteC{nullptr};
 };
 
-/// Tests that the Mine
+/// Tests MineTimer functionality
+/// \note   Will sometimes fail, because two random numbers will randomly be the same
 TEST_F(AcmeMinerTest, InstantiatingMineTimerWithDefaultValuesShouldWork) {
     auto duration1 = (*myMineTimer)();
     EXPECT_TRUE(duration1 >= H3_MINING_MIN && duration1 <= H3_MINING_MAX);
@@ -120,4 +123,37 @@ TEST_F(AcmeMinerTest, SiteDispatcherShouldWorkAsExpected) {
 
     auto* mineSiteC = siteDispatcher->getNextAvailableMine();
     EXPECT_EQ(mineSiteC->getName(), myMineSiteC->getName());
+}
+
+///
+TEST_F(AcmeMinerTest, MineStationStateTransitionsShouldWorkAsExpected) {
+    EXPECT_EQ(myMineStation1->getState(), StationState::IDLE);
+    auto stationDispatcher = MineRegistry::getInstance().getStationDispatcher();
+    stationDispatcher->enqueue(myMineStation1);
+
+    // Place a MineTruck in the MineStation queue
+    myMineTruckA->assignMineSite(myMineSiteA);
+    myMineTruckA->setTruckState(TruckState::INBOUND);
+    EXPECT_TRUE(myMineStation1->getQueueSize() != 0);
+
+    auto tick = 1;
+    std::string timestamp = tickToTimestamp(tick);
+    myMineTruckA->update(timestamp);
+    myMineStation1->update(timestamp);
+    EXPECT_EQ(myMineStation1->getState(), StationState::READY);
+
+    for (auto i = 1; i < TRUCK_TRANSIT_TIME; ++i) {
+        ++tick;
+        timestamp = tickToTimestamp(tick);
+        myMineTruckA->update(timestamp);
+        myMineStation1->update(timestamp);
+    }
+
+    EXPECT_EQ(myMineStation1->getState(), StationState::UNLOADING);
+
+    ++tick;
+    timestamp = tickToTimestamp(tick);
+    myMineTruckA->update(timestamp);
+    myMineStation1->update(timestamp);
+    EXPECT_EQ(myMineStation1->getState(), StationState::IDLE);
 }

@@ -7,6 +7,7 @@
 #include <fstream>
 
 namespace acme {
+bool MineSite::_initial = true;
 ///
 /// \param name
 MineSite::MineSite(const char* name)
@@ -28,8 +29,14 @@ const char* MineSite::getName() const {
 ///
 /// \param timestamp
 void MineSite::outputStatistics(const std::string& timestamp) {
-    std::string mineSiteOutput("MineSite_" + timestamp + ".csv");
+    std::string mineSiteOutput(timestamp + "_MineSite" + ".csv");
     std::ofstream siteOutput(mineSiteOutput, std::ios::app);
+
+    if (MineSite::_initial) {
+        siteOutput << "Mine,Idle,Mining" << std::endl;
+        MineSite::_initial = false;
+    }
+
     siteOutput << getName() << "," << _idleCount << "," << _miningCount << std::endl;
 }
 

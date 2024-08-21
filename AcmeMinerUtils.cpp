@@ -1,5 +1,7 @@
 /// \file   AcmeMinerUtils.cpp
 #include "AcmeMinerUtils.h"
+
+#include "MineDefs.h"
 #include "MineDispatchers.h"
 #include "MineOverlord.h"
 #include "MineSite.h"
@@ -7,6 +9,7 @@
 
 #include <chrono>
 #include <iomanip>
+#include <iostream>
 #include <sstream>
 
 namespace acme {
@@ -87,5 +90,23 @@ void startTrucksAtMines() {
         truck->assignMineSite(siteDispatcher->getNextAvailableMine());
         truck->setTruckState(TruckState::MINING);
     }
+}
+
+/// Converts current tick to an HH:MM:SS timestamp
+/// \param tick
+/// \return
+std::string tickToTimestamp(int tick) {
+    auto numSeconds = tick * SECONDS_PER_TICK;
+
+    auto hours = numSeconds / 3600;
+    numSeconds %= 3600;
+
+    auto minutes = numSeconds / 60;
+    auto seconds = numSeconds % 60;
+
+    std::ostringstream oss;
+    oss << std::setw(2) << std::setfill('0') << hours << ":" << std::setw(2) << std::setfill('0')
+        << minutes << ":" << std::setw(2) << std::setfill('0') << seconds;
+    return oss.str();
 }
 }  // namespace acme

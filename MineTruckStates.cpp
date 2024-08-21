@@ -46,9 +46,9 @@ void MineTruckMining::outputStatistics(std::ofstream& truckOutput) {
 
 /// Updates the state with the context
 void MineTruckMining::update(const std::string& timestamp) {
-    if (_duration % 5 == 0 || _duration < 5) {
+    if (_duration % 5 == 0 || _duration < 10) {
         std::ostringstream oss;
-        oss << timestamp << " : Truck ";
+        oss << timestamp << " : Truck   ";
         oss << _context.getName() << " MINING    at " << _context.getAssignedMineSite()->getName();
         oss << ", remaining duration " << (_duration * TICK_DURATION) << " minutes";
         MineLogger::getInstance().logMessage(oss.str());
@@ -72,9 +72,15 @@ MineTruckInbound::MineTruckInbound(MineTruck& context)
 /// \param duration
 void MineTruckInbound::enterState() {
     _duration = TRUCK_TRANSIT_TIME;
+
+    // Get the MineStation with the shortest queue and place this MineTruck on its queue
     auto* mineStation =
         MineRegistry::getInstance().getStationDispatcher()->getNextAvailableStation();
     _context.assignMineStation(mineStation);
+    mineStation->enqueue(&_context);
+    MineRegistry::getInstance().getStationDispatcher()->enqueue(mineStation);
+
+    // No longer mining
     _context.getAssignedMineSite()->setMiningFlag(false);
 }
 
@@ -100,9 +106,9 @@ void MineTruckInbound::outputStatistics(std::ofstream& truckOutput) {
 
 /// Updates the state with the context
 void MineTruckInbound::update(const std::string& timestamp) {
-    if (_duration % 5 == 0 || _duration < 5) {
+    if (_duration % 3 == 0) {
         std::ostringstream oss;
-        oss << timestamp << " : Truck ";
+        oss << timestamp << " : Truck   ";
         oss << _context.getName() << " INBOUND   to "
             << _context.getAssignedMineStation()->getName();
         oss << ", remaining duration " << (_duration * TICK_DURATION) << " minutes";
@@ -151,18 +157,18 @@ void MineTruckQueued::outputStatistics(std::ofstream& truckOutput) {
 
 /// Updates the state with the context
 void MineTruckQueued::update(const std::string& timestamp) {
-    if (_duration == 0) {
-        _context.setTruckState(getNextState());
-    }
-
     std::ostringstream oss;
-    oss << timestamp << " : Truck ";
+    oss << timestamp << " : Truck   ";
     oss << _context.getName() << " QUEUED    at " << _context.getAssignedMineStation()->getName();
     oss << ", estimated wait time " << (_duration * TICK_DURATION) << " minutes";
     MineLogger::getInstance().logMessage(oss.str());
 
     ++_timeInState;
     --_duration;
+
+    if (_duration == 0) {
+        _context.setTruckState(getNextState());
+    }
 }
 
 ///
@@ -199,7 +205,7 @@ void MineTruckUnloading::outputStatistics(std::ofstream& truckOutput) {
 /// Updates the state with the context
 void MineTruckUnloading::update(const std::string& timestamp) {
     std::ostringstream oss;
-    oss << timestamp << " : Truck ";
+    oss << timestamp << " : Truck   ";
     oss << _context.getName() << " UNLOADING at " << _context.getAssignedMineStation()->getName();
     oss << ", duration 5 minutes";
     MineLogger::getInstance().logMessage(oss.str());
@@ -247,9 +253,9 @@ void MineTruckOutbound::outputStatistics(std::ofstream& truckOutput) {
 
 /// Updates the state with the context
 void MineTruckOutbound::update(const std::string& timestamp) {
-    if (_duration % 5 == 0 || _duration < 5) {
+    if (_duration % 5 == 0 || _duration < 10) {
         std::ostringstream oss;
-        oss << timestamp << " : Truck ";
+        oss << timestamp << " : Truck   ";
         oss << _context.getName() << " OUTBOUND  to " << _context.getAssignedMineSite()->getName();
         oss << ", remaining duration " << (_duration * TICK_DURATION) << " minutes";
         MineLogger::getInstance().logMessage(oss.str());

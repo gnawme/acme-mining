@@ -34,6 +34,9 @@ public:
     std::size_t getQueueSize() const;
 
     ///
+    StationState getState() const;
+
+    ///
     void outputStatistics(const std::string& timestamp) override;
 
     ///
@@ -43,6 +46,7 @@ public:
     void update(const std::string& timestamp) override;
 
 private:
+    static bool _initial;
     std::string _stationName;
     std::string _timestamp;
     StationStateMap _stationStates;
