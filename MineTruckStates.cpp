@@ -43,7 +43,7 @@ void MineTruckMining::update(const std::string& timestamp) {
     if (_duration % 5 == 0 || _duration < 5) {
         std::ostringstream oss;
         oss << timestamp << " : Truck ";
-        oss << _context.getName() << " MINING at " << _context.getAssignedMineSite()->getName();
+        oss << _context.getName() << " MINING    at " << _context.getAssignedMineSite()->getName();
         oss << ", remaining duration " << (_duration * TICK_DURATION) << " minutes";
         MineLogger::getInstance().logMessage(oss.str());
     }
@@ -90,7 +90,7 @@ void MineTruckInbound::update(const std::string& timestamp) {
     if (_duration % 5 == 0 || _duration < 5) {
         std::ostringstream oss;
         oss << timestamp << " : Truck ";
-        oss << _context.getName() << " INBOUND to " << _context.getAssignedMineStation()->getName();
+        oss << _context.getName() << " INBOUND   to " << _context.getAssignedMineStation()->getName();
         oss << ", remaining duration " << (_duration * TICK_DURATION) << " minutes";
         MineLogger::getInstance().logMessage(oss.str());
     }
@@ -138,7 +138,7 @@ void MineTruckQueued::update(const std::string& timestamp) {
 
     std::ostringstream oss;
     oss << timestamp << " : Truck ";
-    oss << _context.getName() << " QUEUED at " << _context.getAssignedMineStation()->getName();
+    oss << _context.getName() << " QUEUED    at " << _context.getAssignedMineStation()->getName();
     oss << ", estimated wait time " << (_duration * TICK_DURATION) << " minutes";
     MineLogger::getInstance().logMessage(oss.str());
 
@@ -176,7 +176,8 @@ const char* MineTruckUnloading::getStateName() const {
 void MineTruckUnloading::update(const std::string& timestamp) {
     std::ostringstream oss;
     oss << timestamp << " : Truck ";
-    oss << _context.getName() << " UNLOADING at  " << _context.getAssignedMineStation()->getName();
+    oss << _context.getName() << " UNLOADING at " << _context.getAssignedMineStation()->getName();
+    oss << ", duration 5 minutes";
     MineLogger::getInstance().logMessage(oss.str());
 
     ++_timeInState;
@@ -220,7 +221,7 @@ void MineTruckOutbound::update(const std::string& timestamp) {
     if (_duration % 5 == 0 || _duration < 5) {
         std::ostringstream oss;
         oss << timestamp << " : Truck ";
-        oss << _context.getName() << " OUTBOUND to " << _context.getAssignedMineSite()->getName();
+        oss << _context.getName() << " OUTBOUND  to " << _context.getAssignedMineSite()->getName();
         oss << ", remaining duration " << (_duration * TICK_DURATION) << " minutes";
         MineLogger::getInstance().logMessage(oss.str());
     }

@@ -49,7 +49,7 @@ private:
         }
     }
 
-    bool _logToFile{true};
+    bool _logToFile{false};
     std::mutex _mutex;
     std::ofstream _logfile;
 };
