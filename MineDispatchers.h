@@ -14,7 +14,10 @@ class SiteDispatcher {
 public:
     SiteDispatcher() = default;
 
+    ///
     void enqueue(MineSite* mineSite);
+
+    ///
     MineSite* getNextAvailableMine();
 
 private:
@@ -34,7 +37,10 @@ class StationDispatcher {
 public:
     StationDispatcher() = default;
 
+    ///
     void enqueue(MineStation*);
+
+    ///
     MineStation* getNextAvailableStation();
 
 private:

@@ -10,7 +10,6 @@ find_package(GTest REQUIRED)
 
 # Define source files
 set(SIM_SOURCE
-        AcmeMinerSim.cpp
         AcmeMinerUtils.cpp
         AcmeMinerUtils.h
         MineDefs.h
@@ -32,10 +31,10 @@ set(SIM_SOURCE
         MineTruckStates.h
 )
 
-set(TEST_SOURCE MineTimerTest.cpp)
+set(TEST_SOURCE AcmeMinerTest.cpp)
 
 # Create the main executable
-add_executable(acme-mining ${SIM_SOURCE})
+add_executable(acme-mining AcmeMinerSim.cpp ${SIM_SOURCE})
 
 # Include directories (if needed)
 target_include_directories(acme-mining PRIVATE ${CMAKE_SOURCE_DIR})
@@ -44,7 +43,7 @@ target_include_directories(acme-mining PRIVATE ${CMAKE_SOURCE_DIR})
 target_link_libraries(acme-mining)
 
 # Create test executable
-add_executable(acme-unit-tests ${TEST_SOURCE})
+add_executable(acme-unit-tests ${TEST_SOURCE} ${SIM_SOURCE})
 
 # Link GTest and pthread libraries to the test executable
 target_link_libraries(acme-unit-tests GTest::GTest GTest::Main pthread)
