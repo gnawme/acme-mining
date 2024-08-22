@@ -12,7 +12,7 @@ class MineTimer;
 class MineSite : public MineMinion {
 public:
     ///
-    explicit MineSite(const char* name);
+    explicit MineSite(const std::string& name);
 
     MineSite() = delete;
     ~MineSite() override = default;

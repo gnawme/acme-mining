@@ -10,7 +10,7 @@ namespace acme {
 bool MineSite::_initial = true;
 ///
 /// \param name
-MineSite::MineSite(const char* name)
+MineSite::MineSite(const std::string& name)
     : _siteName(name)
     , _timer(new MineTimer(H3_MINING_MIN, H3_MINING_MAX))
     , _duration((*_timer)()) {}

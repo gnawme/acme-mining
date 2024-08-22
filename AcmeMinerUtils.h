@@ -8,7 +8,7 @@ class MineOverlord;
 std::string createISODateStamp();
 
 ///
-const char* genMinionName(const char* prefix, int serial);
+std::string genMinionName(const char* prefix, int serial);
 
 ///
 void instantiateSites(MineOverlord& overlord, int numSites);

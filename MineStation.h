@@ -13,7 +13,7 @@ class MineTruck;
 class MineStation : public MineMinion {
 public:
     ///
-    explicit MineStation(const char* name);
+    explicit MineStation(const std::string& name);
 
     MineStation() = delete;
     ~MineStation() override = default;

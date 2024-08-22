@@ -10,7 +10,7 @@ bool MineTruck::_initial = true;
 
 ///
 /// \param name
-MineTruck::MineTruck(const char* name)
+MineTruck::MineTruck(const std::string& name)
     : _truckName(name) {
     // Instantiate MineTruckStates
     _truckStates[TruckState::MINING] = std::make_shared<MineTruckMining>(*this);

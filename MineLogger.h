@@ -20,7 +20,7 @@ public:
 
     ///
     void logMessage(const std::string& msg) {
-        std::clog << msg << std::endl;
+        std::cout << msg << std::endl;
 
         std::lock_guard<std::mutex> lockGuard(_mutex);
         _logfile << msg << std::endl;

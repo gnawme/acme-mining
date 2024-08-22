@@ -11,7 +11,7 @@ bool MineStation::_initial = true;
 
 ///
 /// \param name
-MineStation::MineStation(const char* name)
+MineStation::MineStation(const std::string& name)
     : _stationName(name) {
     _stationStates[StationState::IDLE] = std::make_shared<MineStationIdle>(*this);
     _stationStates[StationState::READY] = std::make_shared<MineStationReady>(*this);

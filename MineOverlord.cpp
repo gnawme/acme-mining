@@ -43,6 +43,8 @@ void MineOverlord::run(int numTrucks, int numStations) {
     oss << "ACME Helium-3 Lunar Mining Operations : " << createISODateStamp() << " : ";
     oss << numTrucks << " mining trucks, " << numStations << " unloading stations";
     MineLogger::getInstance().logMessage(oss.str());
+    std::string separator(oss.str().length(), '=');
+    MineLogger::getInstance().logMessage(separator);
 
     for (auto tick = 0; tick < TICKS_PER_DAY; ++tick) {
         auto timestamp = tickToTimestamp(tick);

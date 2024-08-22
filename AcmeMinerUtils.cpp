@@ -33,10 +33,10 @@ std::string createISODateStamp() {
 /// \param prefix
 /// \param serial
 /// \return
-const char* genMinionName(const char* prefix, int serial) {
+std::string genMinionName(const char* prefix, int serial) {
     std::ostringstream oss;
     oss << prefix << "-" << std::setw(6) << std::setfill('0') << serial;
-    return oss.str().c_str();
+    return oss.str();
 }
 
 /// Instantiates all MineSite instances and attaches them as Observers
