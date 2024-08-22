@@ -41,7 +41,7 @@ const char* MineTruckMining::getStateName() const {
 
 ///
 void MineTruckMining::outputStatistics(std::ofstream& truckOutput) {
-    truckOutput << _timeInState;
+    truckOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context
@@ -102,7 +102,7 @@ const char* MineTruckInbound::getStateName() const {
 
 ///
 void MineTruckInbound::outputStatistics(std::ofstream& truckOutput) {
-    truckOutput << _timeInState;
+    truckOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context
@@ -152,7 +152,7 @@ const char* MineTruckQueued::getStateName() const {
 
 ///
 void MineTruckQueued::outputStatistics(std::ofstream& truckOutput) {
-    truckOutput << _timeInState;
+    truckOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context
@@ -206,7 +206,7 @@ const char* MineTruckUnloading::getStateName() const {
 
 ///
 void MineTruckUnloading::outputStatistics(std::ofstream& truckOutput) {
-    truckOutput << _timeInState;
+    truckOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context
@@ -255,7 +255,7 @@ const char* MineTruckOutbound::getStateName() const {
 
 ///
 void MineTruckOutbound::outputStatistics(std::ofstream& truckOutput) {
-    truckOutput << _timeInState;
+    truckOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context

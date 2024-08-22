@@ -3,8 +3,10 @@
 
 #include "AcmeMinerUtils.h"
 #include "MineDefs.h"
+#include "MineLogger.h"
 
 #include <chrono>
+#include <sstream>
 #include <thread>
 
 namespace acme {
@@ -36,7 +38,12 @@ void MineOverlord::outputStatistics() {
 }
 
 /// Runs through a simulation 'day' (72 hours)
-void MineOverlord::run() {
+void MineOverlord::run(int numTrucks, int numStations) {
+    std::ostringstream oss;
+    oss << "ACME Helium-3 Mining Operations : " << createISODateStamp() << " : ";
+    oss << numTrucks << " mining trucks, " << numStations << " unloading stations";
+    MineLogger::getInstance().logMessage(oss.str());
+
     for (auto tick = 0; tick < TICKS_PER_DAY; ++tick) {
         auto timestamp = tickToTimestamp(tick);
         notify(timestamp);

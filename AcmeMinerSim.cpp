@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     startTrucksAtMines();
 
     // Run one simulation day, then output statistics
-    overlord.run();
+    overlord.run(numTrucks, numStations);
     overlord.outputStatistics();
     EXIT_SUCCESS;
 }

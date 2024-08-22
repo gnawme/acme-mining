@@ -70,6 +70,7 @@ void MineTruck::outputStatistics(const std::string& timestamp) {
         MineTruck::_initial = false;
     }
 
+    truckOutput << getName() << ",";
     _truckStates[TruckState::MINING]->outputStatistics(truckOutput);
     truckOutput << ",";
     _truckStates[TruckState::INBOUND]->outputStatistics(truckOutput);

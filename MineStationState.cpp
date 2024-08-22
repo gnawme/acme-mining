@@ -39,7 +39,7 @@ const char* MineStationIdle::getStateName() const {
 
 ///
 void MineStationIdle::outputStatistics(std::ofstream& stationOutput) {
-    stationOutput << _timeInState;
+    stationOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context
@@ -78,7 +78,7 @@ const char* MineStationReady::getStateName() const {
 
 ///
 void MineStationReady::outputStatistics(std::ofstream& stationOutput) {
-    stationOutput << _timeInState;
+    stationOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context
@@ -126,7 +126,7 @@ const char* MineStationUnloading::getStateName() const {
 
 ///
 void MineStationUnloading::outputStatistics(std::ofstream& stationOutput) {
-    stationOutput << _timeInState;
+    stationOutput << (_timeInState * TICK_DURATION);
 }
 
 /// Updates the state with the context

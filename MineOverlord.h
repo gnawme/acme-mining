@@ -39,7 +39,7 @@ public:
     void outputStatistics();
 
     ///
-    void run();
+    void run(int numTrucks, int numStations);
 
 private:
     std::vector<MineMinion*> _minions;

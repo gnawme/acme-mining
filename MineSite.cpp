@@ -37,7 +37,8 @@ void MineSite::outputStatistics(const std::string& timestamp) {
         MineSite::_initial = false;
     }
 
-    siteOutput << getName() << "," << _idleCount << "," << _miningCount << std::endl;
+    siteOutput << getName() << "," << (_idleCount * TICK_DURATION) << ","
+               << (_miningCount * TICK_DURATION) << std::endl;
 }
 
 ///
