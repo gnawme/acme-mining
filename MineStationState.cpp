@@ -87,14 +87,13 @@ void MineStationReady::update(const std::string& timestamp) {
 
     bool queued =
         ((_context.getQueueSize() != 0)
-         && (_context.front()->getTruckState() != TruckState::QUEUED));
+         && (_context.front()->getTruckState() == TruckState::QUEUED));
 
     if (queued) {
         std::ostringstream oss;
         oss << timestamp << " : Station ";
         oss << _context.getName() << " READY     with " << _context.getQueueSize() << " in queue";
         MineLogger::getInstance().logMessage(oss.str());
-    } else {
         _context.setStationState(getNextState());
     }
 }
@@ -112,11 +111,7 @@ void MineStationUnloading::enterState() {
 
 ///
 StationState MineStationUnloading::getNextState() const {
-    if (_context.getQueueSize() == 0) {
-        return StationState::IDLE;
-    } else {
-        return StationState::READY;
-    }
+    return StationState::READY;
 }
 
 ///
@@ -140,14 +135,10 @@ void MineStationUnloading::update(const std::string& timestamp) {
     --_duration;
 
     if (_duration == 0) {
-        // Remove the MineTruck from the queue, and requeue the MineStation
-        auto* mineTruck = _context.dequeue();
-        auto stationDispatcher = MineRegistry::getInstance().getStationDispatcher();
-        stationDispatcher->enqueue(&_context);
-
         std::ostringstream oss;
         oss << timestamp << " : Station ";
-        oss << _context.getName() << " UNLOADING truck " << mineTruck->getName();
+        oss << _context.getName() << " UNLOADING " << _context.getName();
+        oss << ", " << _context.getQueueSize() << " left in queue";
         MineLogger::getInstance().logMessage(oss.str());
         _context.setStationState(getNextState());
     }

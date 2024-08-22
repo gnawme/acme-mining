@@ -155,5 +155,5 @@ TEST_F(AcmeMinerTest, MineStationStateTransitionsShouldWorkAsExpected) {
     timestamp = tickToTimestamp(tick);
     myMineTruckA->update(timestamp);
     myMineStation1->update(timestamp);
-    EXPECT_EQ(myMineStation1->getState(), StationState::IDLE);
+    EXPECT_EQ(myMineStation1->getState(), StationState::READY);
 }

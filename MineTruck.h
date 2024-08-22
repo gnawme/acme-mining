@@ -34,10 +34,16 @@ public:
     const char* getName() const override;
 
     ///
+    int getPlaceInQueue() const;
+
+    ///
     TruckState getTruckState() const;
 
     ///
     void outputStatistics(const std::string& timestamp) override;
+
+    ///
+    void setPlaceInQueue(int);
 
     ///
     void setTruckState(TruckState);
@@ -54,5 +60,6 @@ private:
     MineTruckState* _currentState{nullptr};
     MineSite* _mineSite{nullptr};
     MineStation* _mineStation{nullptr};
+    int _placeInQueue{0};
 };
 }  // namespace acme

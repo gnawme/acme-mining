@@ -1,7 +1,10 @@
 /// \file   MineStation.cpp
 #include "MineStation.h"
 
+#include "MineTruck.h"
+
 #include <fstream>
+#include <iostream>
 
 namespace acme {
 bool MineStation::_initial = true;
@@ -20,15 +23,18 @@ MineStation::MineStation(const char* name)
 
 ///
 MineTruck* MineStation::dequeue() {
-    auto mineTruck = _truckQueue.front();
+    auto* mineTruck = _truckQueue.front();
     _truckQueue.pop();
+    --_placeInQueue;
     return mineTruck;
 }
 
 ///
 /// \param mineTruck
-void MineStation::enqueue(MineTruck* mineTruck) {
+int MineStation::enqueue(MineTruck* mineTruck) {
     _truckQueue.push(mineTruck);
+    ++_placeInQueue;
+    return _placeInQueue;
 }
 
 ///

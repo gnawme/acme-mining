@@ -22,7 +22,7 @@ public:
     MineTruck* dequeue();
 
     ///
-    void enqueue(MineTruck*);
+    int enqueue(MineTruck*);
 
     ///
     MineTruck* front();
@@ -53,5 +53,6 @@ private:
 
     MineStationState* _currentState{nullptr};
     std::queue<MineTruck*> _truckQueue;
+    int _placeInQueue{0};
 };
 }  // namespace acme

@@ -50,6 +50,11 @@ const char* MineTruck::getName() const {
     return _truckName.c_str();
 }
 
+///
+int MineTruck::getPlaceInQueue() const {
+    return _placeInQueue;
+}
+
 TruckState MineTruck::getTruckState() const {
     return _currentState->getState();
 }
@@ -62,9 +67,9 @@ void MineTruck::outputStatistics(const std::string& timestamp) {
 
     if (MineTruck::_initial) {
         truckOutput << "Truck,Mining,Inbound,Queued,Unloading,Outbound" << std::endl;
+        MineTruck::_initial = false;
     }
 
-    truckOutput << getName() << ",";
     _truckStates[TruckState::MINING]->outputStatistics(truckOutput);
     truckOutput << ",";
     _truckStates[TruckState::INBOUND]->outputStatistics(truckOutput);
@@ -75,6 +80,12 @@ void MineTruck::outputStatistics(const std::string& timestamp) {
     truckOutput << ",";
     _truckStates[TruckState::OUTBOUND]->outputStatistics(truckOutput);
     truckOutput << std::endl;
+}
+
+///
+/// \param placeInQueue
+void MineTruck::setPlaceInQueue(int placeInQueue) {
+    _placeInQueue = placeInQueue;
 }
 
 ///
