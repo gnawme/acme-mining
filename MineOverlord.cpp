@@ -40,7 +40,7 @@ void MineOverlord::outputStatistics() {
 /// Runs through a simulation 'day' (72 hours)
 void MineOverlord::run(int numTrucks, int numStations) {
     std::ostringstream oss;
-    oss << "ACME Helium-3 Mining Operations : " << createISODateStamp() << " : ";
+    oss << "ACME Helium-3 Lunar Mining Operations : " << createISODateStamp() << " : ";
     oss << numTrucks << " mining trucks, " << numStations << " unloading stations";
     MineLogger::getInstance().logMessage(oss.str());
 
