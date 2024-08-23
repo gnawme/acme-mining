@@ -3,7 +3,9 @@
 
 #include "AcmeMinerUtils.h"
 #include "MineDefs.h"
+#include "MineDispatchers.h"
 #include "MineLogger.h"
+#include "MineTruck.h"
 
 #include <chrono>
 #include <sstream>
@@ -34,6 +36,11 @@ void MineOverlord::outputStatistics() {
     auto timestamp = createISODateStamp();
     for (auto* minion : _minions) {
         minion->outputStatistics(timestamp);
+    }
+
+    auto truckDispatcher = MineRegistry::getInstance().getTruckDispatcher();
+    for (auto truck : truckDispatcher->truckGarage) {
+        truck->outputStationVisits(timestamp);
     }
 }
 

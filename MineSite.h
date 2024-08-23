@@ -21,7 +21,7 @@ public:
     int getMiningDuration();
 
     ///
-    const char* getName() const override;
+    std::string getName() const override;
 
     ///
     void outputStatistics(const std::string& timestamp) override;

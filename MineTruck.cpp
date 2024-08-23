@@ -7,6 +7,7 @@
 
 namespace acme {
 bool MineTruck::_initial = true;
+bool MineTruck::_revisited = true;
 
 ///
 /// \param name
@@ -46,8 +47,8 @@ MineStation* MineTruck::getAssignedMineStation() const {
 }
 
 ///
-const char* MineTruck::getName() const {
-    return _truckName.c_str();
+std::string MineTruck::getName() const {
+    return _truckName;
 }
 
 ///
@@ -57,6 +58,21 @@ int MineTruck::getPlaceInQueue() const {
 
 TruckState MineTruck::getTruckState() const {
     return _currentState->getState();
+}
+
+///
+void MineTruck::outputStationVisits(const std::string& timestamp) {
+    std::string mineTruckOutput(timestamp + "_StationVisits" + ".csv");
+    std::ofstream truckOutput(mineTruckOutput, std::ios::app);
+
+    if (MineTruck::_revisited) {
+        truckOutput << "Truck,Site,Visits" << std::endl;
+        MineTruck::_revisited = false;
+    }
+
+    auto truckState = _truckStates[TruckState::INBOUND];
+    auto inbound = static_cast<MineTruckInbound*>(truckState.get());
+    inbound->outputStationVisits(truckOutput);
 }
 
 ///

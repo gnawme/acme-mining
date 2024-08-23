@@ -95,6 +95,9 @@ public:
     const char* getStateName() const override;
 
     ///
+    void outputStationVisits(std::ofstream&);
+
+    ///
     void outputStatistics(std::ofstream&) override;
 
     ///
@@ -104,6 +107,7 @@ private:
     MineTruck& _context;
     int _duration{0};
     int _timeInState{0};
+    std::unordered_map<std::string, int> _stationsVisited;
 };
 
 /// \class  MineTruckQueued

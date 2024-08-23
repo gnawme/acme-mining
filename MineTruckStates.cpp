@@ -77,6 +77,8 @@ void MineTruckInbound::enterState() {
     auto* mineStation =
         MineRegistry::getInstance().getStationDispatcher()->getNextAvailableStation();
     _context.assignMineStation(mineStation);
+    _stationsVisited[mineStation->getName()]++;
+
     auto placeInQueue = mineStation->enqueue(&_context);
     _context.setPlaceInQueue(placeInQueue);
     MineRegistry::getInstance().getStationDispatcher()->enqueue(mineStation);
@@ -98,6 +100,13 @@ TruckState MineTruckInbound::getNextState() const {
 /// Gets the text of the state name
 const char* MineTruckInbound::getStateName() const {
     return TRUCK_STATE_NAME[TruckState::INBOUND];
+}
+
+///
+void MineTruckInbound::outputStationVisits(std::ofstream& truckOutput) {
+    for (const auto& [station, count] : _stationsVisited) {
+        truckOutput << _context.getName() << "," << station << "," << count << std::endl;
+    }
 }
 
 ///

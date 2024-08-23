@@ -28,7 +28,7 @@ public:
     MineTruck* front();
 
     ///
-    const char* getName() const override;
+    std::string getName() const override;
 
     ///
     std::size_t getQueueSize() const;

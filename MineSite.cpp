@@ -22,8 +22,8 @@ int MineSite::getMiningDuration() {
 }
 
 /// Returns the mine's name
-const char* MineSite::getName() const {
-    return _siteName.c_str();
+std::string MineSite::getName() const {
+    return _siteName;
 }
 
 ///

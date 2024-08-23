@@ -48,8 +48,8 @@ std::size_t MineStation::getQueueSize() const {
 }
 
 ///
-const char* MineStation::getName() const {
-    return _stationName.c_str();
+std::string MineStation::getName() const {
+    return _stationName;
 }
 
 ///

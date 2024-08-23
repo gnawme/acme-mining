@@ -31,13 +31,16 @@ public:
     MineStation* getAssignedMineStation() const;
 
     ///
-    const char* getName() const override;
+    std::string getName() const override;
 
     ///
     int getPlaceInQueue() const;
 
     ///
     TruckState getTruckState() const;
+
+    ///
+    void outputStationVisits(const std::string& timestamp);
 
     ///
     void outputStatistics(const std::string& timestamp) override;
@@ -53,6 +56,8 @@ public:
 
 private:
     static bool _initial;
+    static bool _revisited;
+
     std::string _truckName;
     std::string _timestamp;
     TruckStateMap _truckStates;

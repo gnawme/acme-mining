@@ -13,7 +13,7 @@ public:
     virtual ~MineMinion() = default;
 
     ///
-    virtual const char* getName() const = 0;
+    virtual std::string getName() const = 0;
 
     ///
     virtual void outputStatistics(const std::string& timestamp) = 0;
