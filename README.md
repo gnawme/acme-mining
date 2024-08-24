@@ -16,6 +16,8 @@ AHLMO employs CMake, and supports the usual CMake build steps:
 3. Use CMake to configure the build: `cmake ..`
 4. Use CMake or Make to build the applications: `cmake --build .` or `make`
 
+Note that CMake assumes that Google Test is installed where CMake can find it.
+
 ### Running AHLMO
 
 AHLMO supports a small suite of unit tests; run them by invoking
