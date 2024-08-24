@@ -30,9 +30,6 @@ public:
     void attach(MineMinion* minion);
 
     ///
-    int getNumMinions() const;
-
-    ///
     void notify(const std::string& timestamp);
 
     ///

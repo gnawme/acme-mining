@@ -18,12 +18,7 @@ void MineOverlord::attach(MineMinion* minion) {
     _minions.push_back(minion);
 }
 
-///
-int MineOverlord::getNumMinions() const {
-    return static_cast<int>(_minions.size());
-}
-
-///
+/// Notifies Observers (MineMinions)
 /// \param timestamp
 void MineOverlord::notify(const std::string& timestamp) {
     for (auto* minion : _minions) {
@@ -31,7 +26,7 @@ void MineOverlord::notify(const std::string& timestamp) {
     }
 }
 
-///
+/// Iterates over MineMinions to output their stats
 void MineOverlord::outputStatistics() {
     auto timestamp = createISODateStamp();
     for (auto* minion : _minions) {

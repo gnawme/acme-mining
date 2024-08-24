@@ -35,7 +35,7 @@ std::string createISODateStamp() {
 /// \return
 std::string genMinionName(const char* prefix, int serial) {
     std::ostringstream oss;
-    oss << prefix << "-" << std::setw(6) << std::setfill('0') << std::dec << serial;
+    oss << prefix << "-" << std::setw(6) << std::setfill('0') << serial;
     return oss.str();
 }
 

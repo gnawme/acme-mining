@@ -21,7 +21,7 @@ MineStation::MineStation(const std::string& name)
     _currentState = _stationStates[StationState::IDLE].get();
 }
 
-///
+/// Removes a MineTruck from the queue
 MineTruck* MineStation::dequeue() {
     auto* mineTruck = _truckQueue.front();
     _truckQueue.pop();
@@ -29,7 +29,7 @@ MineTruck* MineStation::dequeue() {
     return mineTruck;
 }
 
-///
+/// Places a MineTruck on the queue
 /// \param mineTruck
 int MineStation::enqueue(MineTruck* mineTruck) {
     _truckQueue.push(mineTruck);
@@ -57,7 +57,7 @@ StationState MineStation::getState() const {
     return _currentState->getState();
 }
 
-///
+/// Outputs MineSite stats; delegates to MineStationState classes
 /// \param timestamp
 void MineStation::outputStatistics(const std::string& timestamp) {
     std::string mineStationOutput(timestamp + "_MineStation" + ".csv");

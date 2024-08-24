@@ -26,7 +26,7 @@ std::string MineSite::getName() const {
     return _siteName;
 }
 
-///
+/// Outputs MineSite statistics
 /// \param timestamp
 void MineSite::outputStatistics(const std::string& timestamp) {
     std::string mineSiteOutput(timestamp + "_MineSite" + ".csv");
@@ -41,7 +41,7 @@ void MineSite::outputStatistics(const std::string& timestamp) {
                << (_miningCount * TICK_DURATION) << std::endl;
 }
 
-///
+/// Set if a MineTruck is mining
 void MineSite::setMiningFlag(bool beingMined) {
     _beingMined = beingMined;
 }

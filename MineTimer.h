@@ -10,7 +10,7 @@ namespace acme {
 static constexpr int H3_MINING_MIN = 1 * TICKS_PER_HOUR;  // 1 hour = 12 ticks
 static constexpr int H3_MINING_MAX = 5 * TICKS_PER_HOUR;  // 5 hours = 60 ticks
 
-///
+/// Generates random mining times
 class MineTimer {
 public:
     ///

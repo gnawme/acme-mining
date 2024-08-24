@@ -60,7 +60,7 @@ TruckState MineTruck::getTruckState() const {
     return _currentState->getState();
 }
 
-///
+/// Outputs stations visited for this MineTruck
 void MineTruck::outputStationVisits(const std::string& timestamp) {
     std::string mineTruckOutput(timestamp + "_StationVisits" + ".csv");
     std::ofstream truckOutput(mineTruckOutput, std::ios::app);
@@ -75,7 +75,7 @@ void MineTruck::outputStationVisits(const std::string& timestamp) {
     inbound->outputStationVisits(truckOutput);
 }
 
-///
+/// Outputs MineTruck stats; delegates to MineTruckState classes
 /// \param timestamp
 void MineTruck::outputStatistics(const std::string& timestamp) {
     std::string mineTruckOutput(timestamp + "_MineTruck" + ".csv");
