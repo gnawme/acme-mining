@@ -1,0 +1,10 @@
+<map id="MineTruck.h" name="MineTruck.h">
+<area shape="rect" id="node1" title=" " alt="" coords="491,5,586,32"/>
+<area shape="rect" id="node2" href="$AcmeMinerTest_8cpp.html" title="Unit tests for various Mine constructs." alt="" coords="5,80,144,107"/>
+<area shape="rect" id="node3" href="$AcmeMinerUtils_8cpp.html" title=" " alt="" coords="169,80,309,107"/>
+<area shape="rect" id="node4" href="$MineOverlord_8cpp.html" title="Clock publisher for all Mine constructs." alt="" coords="333,80,457,107"/>
+<area shape="rect" id="node5" href="$MineStation_8cpp.html" title=" " alt="" coords="481,80,597,107"/>
+<area shape="rect" id="node6" href="$MineStationState_8cpp.html" title=" " alt="" coords="621,80,768,107"/>
+<area shape="rect" id="node7" href="$MineTruck_8cpp.html" title=" " alt="" coords="793,80,901,107"/>
+<area shape="rect" id="node8" href="$MineTruckStates_8cpp.html" title=" " alt="" coords="925,80,1072,107"/>
+</map>

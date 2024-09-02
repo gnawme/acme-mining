@@ -1,0 +1,6 @@
+<map id="acme::MineMinion" name="acme::MineMinion">
+<area shape="rect" id="node1" title="Observer for MineOverlord." alt="" coords="145,5,273,32"/>
+<area shape="rect" id="node2" href="$classacme_1_1MineSite.html" title=" " alt="" coords="5,80,119,107"/>
+<area shape="rect" id="node3" href="$classacme_1_1MineStation.html" title=" " alt="" coords="143,80,274,107"/>
+<area shape="rect" id="node4" href="$classacme_1_1MineTruck.html" title=" " alt="" coords="298,80,421,107"/>
+</map>

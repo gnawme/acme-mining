@@ -1,0 +1,8 @@
+<map id="MineSite.h" name="MineSite.h">
+<area shape="rect" id="node1" title="Represents an H3 mining site." alt="" coords="363,5,447,32"/>
+<area shape="rect" id="node2" href="$AcmeMinerTest_8cpp.html" title="Unit tests for various Mine constructs." alt="" coords="5,80,144,107"/>
+<area shape="rect" id="node3" href="$AcmeMinerUtils_8cpp.html" title=" " alt="" coords="169,80,309,107"/>
+<area shape="rect" id="node4" href="$MineDispatchers_8cpp.html" title="Dispatcher classes and their object registry." alt="" coords="333,80,478,107"/>
+<area shape="rect" id="node5" href="$MineSite_8cpp.html" title="Represents an H3 mining site." alt="" coords="503,80,601,107"/>
+<area shape="rect" id="node6" href="$MineTruckStates_8cpp.html" title=" " alt="" coords="625,80,772,107"/>
+</map>

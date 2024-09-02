@@ -1,0 +1,8 @@
+<map id="acme::MineTruckState" name="acme::MineTruckState">
+<area shape="rect" id="node1" title="ABC for MineTruck states." alt="" coords="5,107,160,133"/>
+<area shape="rect" id="node2" href="$classacme_1_1MineTruckInbound.html" title="Concrete INBOUND state." alt="" coords="214,5,383,32"/>
+<area shape="rect" id="node3" href="$classacme_1_1MineTruckMining.html" title="Concrete MINING state." alt="" coords="218,56,379,83"/>
+<area shape="rect" id="node4" href="$classacme_1_1MineTruckOutbound.html" title="Concrete OUTBOUND state." alt="" coords="209,107,388,133"/>
+<area shape="rect" id="node5" href="$classacme_1_1MineTruckQueued.html" title="Concrete QUEUED state." alt="" coords="215,157,383,184"/>
+<area shape="rect" id="node6" href="$classacme_1_1MineTruckUnloading.html" title="Concrete UNLOADING state." alt="" coords="208,208,389,235"/>
+</map>

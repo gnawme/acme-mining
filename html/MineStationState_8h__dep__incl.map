@@ -1,0 +1,12 @@
+<map id="MineStationState.h" name="MineStationState.h">
+<area shape="rect" id="node1" title=" " alt="" coords="740,5,873,32"/>
+<area shape="rect" id="node2" href="$MineStation_8h.html" title=" " alt="" coords="682,80,785,107"/>
+<area shape="rect" id="node8" href="$MineStationState_8cpp.html" title=" " alt="" coords="821,229,968,256"/>
+<area shape="rect" id="node3" href="$MineDispatchers_8h_source.html" title=" " alt="" coords="507,155,637,181"/>
+<area shape="rect" id="node9" href="$MineTruckStates_8cpp.html" title=" " alt="" coords="5,229,152,256"/>
+<area shape="rect" id="node10" href="$MineStation_8cpp.html" title=" " alt="" coords="675,155,791,181"/>
+<area shape="rect" id="node4" href="$AcmeMinerTest_8cpp.html" title="Unit tests for various Mine constructs." alt="" coords="659,229,797,256"/>
+<area shape="rect" id="node5" href="$AcmeMinerUtils_8cpp.html" title=" " alt="" coords="177,229,317,256"/>
+<area shape="rect" id="node6" href="$MineDispatchers_8cpp.html" title="Dispatcher classes and their object registry." alt="" coords="341,229,486,256"/>
+<area shape="rect" id="node7" href="$MineOverlord_8cpp.html" title="Clock publisher for all Mine constructs." alt="" coords="510,229,634,256"/>
+</map>

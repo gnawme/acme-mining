@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classacme_1_1MineStationState.html" title="ABC for MineStation states." alt="" coords="5,56,168,83"/>
+<area shape="rect" id="node2" href="$classacme_1_1MineStationIdle.html" title="Concrete IDLE state." alt="" coords="235,5,387,32"/>
+<area shape="rect" id="node3" href="$classacme_1_1MineStationReady.html" title="Concrete READY state." alt="" coords="226,56,395,83"/>
+<area shape="rect" id="node4" href="$classacme_1_1MineStationUnloading.html" title="Concrete UNLOADING state." alt="" coords="216,107,405,133"/>
+</map>

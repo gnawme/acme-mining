@@ -1,0 +1,6 @@
+<map id="acme::MineStationState" name="acme::MineStationState">
+<area shape="rect" id="node1" title="ABC for MineStation states." alt="" coords="185,5,348,32"/>
+<area shape="rect" id="node2" href="$classacme_1_1MineStationIdle.html" title="Concrete IDLE state." alt="" coords="5,80,157,107"/>
+<area shape="rect" id="node3" href="$classacme_1_1MineStationReady.html" title="Concrete READY state." alt="" coords="182,80,351,107"/>
+<area shape="rect" id="node4" href="$classacme_1_1MineStationUnloading.html" title="Concrete UNLOADING state." alt="" coords="376,80,565,107"/>
+</map>

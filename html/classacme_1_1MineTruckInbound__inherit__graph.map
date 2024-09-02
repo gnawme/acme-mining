@@ -1,0 +1,4 @@
+<map id="acme::MineTruckInbound" name="acme::MineTruckInbound">
+<area shape="rect" id="node1" title="Concrete INBOUND state." alt="" coords="5,80,175,107"/>
+<area shape="rect" id="node2" href="$classacme_1_1MineTruckState.html" title="ABC for MineTruck states." alt="" coords="13,5,167,32"/>
+</map>

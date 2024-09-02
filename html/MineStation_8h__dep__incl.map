@@ -1,0 +1,11 @@
+<map id="MineStation.h" name="MineStation.h">
+<area shape="rect" id="node1" title=" " alt="" coords="699,5,801,32"/>
+<area shape="rect" id="node2" href="$MineDispatchers_8h_source.html" title=" " alt="" coords="491,80,622,107"/>
+<area shape="rect" id="node7" href="$MineStationState_8cpp.html" title=" " alt="" coords="651,155,798,181"/>
+<area shape="rect" id="node8" href="$MineTruckStates_8cpp.html" title=" " alt="" coords="822,155,969,181"/>
+<area shape="rect" id="node9" href="$MineStation_8cpp.html" title=" " alt="" coords="813,80,929,107"/>
+<area shape="rect" id="node3" href="$AcmeMinerTest_8cpp.html" title="Unit tests for various Mine constructs." alt="" coords="323,155,462,181"/>
+<area shape="rect" id="node4" href="$AcmeMinerUtils_8cpp.html" title=" " alt="" coords="487,155,627,181"/>
+<area shape="rect" id="node5" href="$MineDispatchers_8cpp.html" title="Dispatcher classes and their object registry." alt="" coords="5,155,151,181"/>
+<area shape="rect" id="node6" href="$MineOverlord_8cpp.html" title="Clock publisher for all Mine constructs." alt="" coords="175,155,299,181"/>
+</map>

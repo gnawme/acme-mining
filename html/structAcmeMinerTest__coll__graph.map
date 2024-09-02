@@ -1,0 +1,9 @@
+<map id="AcmeMinerTest" name="AcmeMinerTest">
+<area shape="rect" id="node1" title=" " alt="" coords="284,200,397,227"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,81,100,108"/>
+<area shape="rect" id="node3" href="$classacme_1_1MineStation.html" title=" " alt="" coords="125,81,255,108"/>
+<area shape="rect" id="node4" href="$classacme_1_1MineMinion.html" title="Observer for MineOverlord." alt="" coords="277,5,405,32"/>
+<area shape="rect" id="node6" href="$classacme_1_1MineTruck.html" title=" " alt="" coords="279,81,402,108"/>
+<area shape="rect" id="node7" href="$classacme_1_1MineSite.html" title=" " alt="" coords="427,81,540,108"/>
+<area shape="rect" id="node5" href="$classacme_1_1MineTimer.html" title="Generates random mining times." alt="" coords="565,81,687,108"/>
+</map>
