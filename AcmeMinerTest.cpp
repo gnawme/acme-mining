@@ -96,7 +96,7 @@ TEST_F(AcmeMinerTest, StationDispatcherQueuesShouldWorkAsExpected) {
     auto* availableStation = stationDispatcher->getNextAvailableStation();
     EXPECT_EQ(myMineStation2->getName(), availableStation->getName());
 
-    auto truckA = myMineStation1->dequeue();
+    auto* truckA = myMineStation1->dequeue();
     stationDispatcher->enqueue(myMineStation1);
 
     myMineStation2->enqueue(truckA);

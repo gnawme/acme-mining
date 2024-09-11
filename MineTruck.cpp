@@ -71,7 +71,7 @@ void MineTruck::outputStationVisits(const std::string& timestamp) {
     }
 
     auto truckState = _truckStates[TruckState::INBOUND];
-    auto inbound = static_cast<MineTruckInbound*>(truckState.get());
+    auto* inbound = static_cast<MineTruckInbound*>(truckState.get());
     inbound->outputStationVisits(truckOutput);
 }
 

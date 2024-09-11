@@ -47,7 +47,7 @@ void instantiateSites(MineOverlord& overlord, int numSites) {
     for (auto site = 0; site < numSites; ++site) {
         constexpr char SITE_PREFIX[]{"ASIT"};
         auto name = genMinionName(SITE_PREFIX, site);
-        auto miningSite = new MineSite(name);
+        auto* miningSite = new MineSite(name);
         overlord.attach(miningSite);
         siteDispatcher->enqueue(miningSite);
     }
@@ -61,7 +61,7 @@ void instantiateStations(MineOverlord& overlord, int numStations) {
     for (auto station = 0; station < numStations; ++station) {
         constexpr char STATION_PREFIX[]{"ASTN"};
         auto name = genMinionName(STATION_PREFIX, station);
-        auto miningStation = new MineStation(name);
+        auto* miningStation = new MineStation(name);
         overlord.attach(miningStation);
         stationDispatcher->enqueue(miningStation);
     }
@@ -75,7 +75,7 @@ void instantiateTrucks(MineOverlord& overlord, int numTrucks) {
     for (auto truck = 0; truck < numTrucks; ++truck) {
         constexpr char TRUCK_PREFIX[]{"ATRK"};
         auto name = genMinionName(TRUCK_PREFIX, truck);
-        auto miningTruck = new MineTruck(name);
+        auto* miningTruck = new MineTruck(name);
         overlord.attach(miningTruck);
         truckDispatcher->truckGarage.push_back(miningTruck);
     }
