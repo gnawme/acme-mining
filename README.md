@@ -87,3 +87,44 @@ AHLMO will take about 3-1/2 minutes to simulate a 72-hour mining day, and will p
 - Conan manages all external dependencies (currently Google Test)
 - The `--build=missing` flag ensures Conan builds any dependencies not available as pre-built binaries
 - No system-wide installation of Google Test is required
+
+---
+
+## Problem Statement
+
+### Objective
+
+This simulation was developed to manage a lunar Helium-3 space mining operation, tracking the efficiency of mining trucks and unload stations over a continuous 72-hour operation.
+
+### Key Components
+
+**Mining Trucks:** Autonomous vehicles that perform the actual mining tasks.
+
+**Mining Sites:** Locations on the moon where trucks extract Helium-3. The simulation assumes an infinite number of sites, ensuring trucks always have access to mine without waiting.
+
+**Mining Unload Stations:** Designated stations where trucks unload the mined Helium-3. Each station can handle one truck at a time.
+
+### Operation Details
+
+- There are *n* mining trucks and *m* mining unload stations (configurable)
+- Mining trucks spend a random duration between 1 to 5 hours mining at the sites
+- Travel time between a mining site and an unload station is 30 minutes
+- All trucks start empty at a mining site when the simulation begins
+- Unloading mined Helium-3 at a station takes 5 minutes
+- Trucks are assigned to the first available unload station
+- If all stations are occupied, trucks queue at the station with the shortest wait time and remain in their chosen queue
+
+### Simulation Requirements
+
+- Configurable to accommodate various numbers of mining trucks (*n*) and unload stations (*m*)
+- Calculates and reports statistics for the performance and efficiency of each mining truck and unload station
+- Represents 72 hours of non-stop mining
+- Executes faster than real-time to provide timely analysis
+
+### Implementation Approach
+
+This project is implemented in C++ leveraging object-oriented programming principles where appropriate, including:
+- State machine-based truck control
+- Event-driven simulation architecture
+- Modular design with clear separation of concerns
+- Comprehensive logging and statistical analysis output
