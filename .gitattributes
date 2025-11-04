@@ -1,0 +1,15 @@
+# Force GitHub to recognize this as a C++ project
+*.cpp linguist-language=C++
+*.h linguist-language=C++
+*.hpp linguist-language=C++
+*.cc linguist-language=C++
+*.cxx linguist-language=C++
+
+# Exclude generated files and documentation from language statistics
+*.html linguist-documentation
+*.md linguist-documentation
+docs/* linguist-documentation
+build/* linguist-generated
+*.json linguist-generated
+*.cmake linguist-generated
+CMakeFiles/* linguist-generated
