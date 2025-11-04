@@ -2,9 +2,13 @@
 /// \brief  Represents an H3 mining site
 #include "MineSite.h"
 
+#include "MineDefs.h"
 #include "MineTimer.h"
 
 #include <fstream>
+#include <ios>
+#include <ostream>
+#include <string>
 
 namespace acme {
 bool MineSite::_initial = true;

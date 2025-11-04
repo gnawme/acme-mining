@@ -6,9 +6,11 @@
 #include "MineLogger.h"
 #include "MineStation.h"
 #include "MineTruck.h"
+#include "MineTruckStates.h"
 
 #include <fstream>
 #include <sstream>
+#include <string>
 
 namespace acme {
 ///
@@ -43,7 +45,7 @@ void MineStationIdle::outputStatistics(std::ofstream& stationOutput) {
 }
 
 /// Updates the state with the context
-void MineStationIdle::update(const std::string& timestamp) {
+void MineStationIdle::update(const std::string& /*timestamp*/) {
     ++_timeInState;
     if (_context.getQueueSize() != 0) {
         _context.setStationState(getNextState());

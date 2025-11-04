@@ -1,9 +1,11 @@
 /// \file   MineTruck.cpp
 #include "MineTruck.h"
+#include "MineTruckStates.h"
 
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include <string>
 
 namespace acme {
 bool MineTruck::_initial = true;
@@ -71,7 +73,7 @@ void MineTruck::outputStationVisits(const std::string& timestamp) {
     }
 
     auto truckState = _truckStates[TruckState::INBOUND];
-    auto* inbound = static_cast<MineTruckInbound*>(truckState.get());
+    auto* inbound = dynamic_cast<MineTruckInbound*>(truckState.get());
     inbound->outputStationVisits(truckOutput);
 }
 

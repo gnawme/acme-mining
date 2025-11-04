@@ -1,15 +1,16 @@
 /// \file   AcmeMinerTest.cpp
 /// \brief  Unit tests for various Mine constructs
 #include "AcmeMinerUtils.h"
+#include "MineDefs.h"
 #include "MineDispatchers.h"
 #include "MineSite.h"
+#include "MineStationState.h"
 #include "MineTimer.h"
 #include "MineTruck.h"
+#include "MineTruckStates.h"
 
 #include <gtest/gtest.h>
 
-#include <iostream>
-#include <memory>
 
 using namespace acme;
 

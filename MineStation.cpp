@@ -1,10 +1,14 @@
 /// \file   MineStation.cpp
 #include "MineStation.h"
 
+#include "MineStationState.h"
 #include "MineTruck.h"
 
+#include <cstddef>
 #include <fstream>
 #include <iostream>
+#include <memory>
+#include <string>
 
 namespace acme {
 bool MineStation::_initial = true;

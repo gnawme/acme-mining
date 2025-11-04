@@ -2,6 +2,7 @@
 #include "MineDispatchers.h"
 
 #include "MineSite.h"
+#include "MineStation.h"
 
 namespace acme {
 /// Pushes a MineSite onto the (idle) queue

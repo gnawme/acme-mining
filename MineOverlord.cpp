@@ -9,6 +9,7 @@
 
 #include <chrono>
 #include <sstream>
+#include <string>
 #include <thread>
 
 namespace acme {
@@ -34,7 +35,7 @@ void MineOverlord::outputStatistics() {
     }
 
     auto truckDispatcher = MineRegistry::getInstance().getTruckDispatcher();
-    for (auto truck : truckDispatcher->truckGarage) {
+    for (auto* truck : truckDispatcher->truckGarage) {
         truck->outputStationVisits(timestamp);
     }
 }

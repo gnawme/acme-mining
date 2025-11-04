@@ -8,7 +8,10 @@
 #include "MineStation.h"
 #include "MineTruck.h"
 
+#include <fstream>
+#include <ostream>
 #include <sstream>
+#include <string>
 
 namespace acme {
 ///

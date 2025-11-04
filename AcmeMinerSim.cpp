@@ -3,8 +3,8 @@
 #include "MineOverlord.h"
 
 #include <cassert>
+#include <cstdlib>
 #include <iostream>
-#include <limits>
 #include <string>
 
 using namespace acme;
