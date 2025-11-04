@@ -1,11 +1,11 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.15)
 project(acme-mining)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall")
 
-# Find GTest package
+# Find dependencies using Conan-generated files
 find_package(GTest REQUIRED)
 
 # Define source files
@@ -45,5 +45,5 @@ target_link_libraries(acme-mining)
 # Create test executable
 add_executable(acme-unit-tests ${TEST_SOURCE} ${SIM_SOURCE})
 
-# Link GTest and pthread libraries to the test executable
-target_link_libraries(acme-unit-tests GTest::GTest GTest::Main pthread)
+# Link GTest libraries to the test executable (Conan-managed)
+target_link_libraries(acme-unit-tests GTest::gtest GTest::gtest_main)
