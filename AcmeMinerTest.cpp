@@ -25,7 +25,7 @@ struct AcmeMinerTest : public ::testing::Test {
         myMineTruckC = new MineTruck("ATRK-00000C");
 
         myMineStation1 = new MineStation("ASTN-000001");
-        myMineStation2 = new MineStation("ASTN-000001");
+        myMineStation2 = new MineStation("ASTN-000002");
 
         myMineSiteA = new MineSite("ASIT-00000A");
         myMineSiteB = new MineSite("ASIT-00000B");

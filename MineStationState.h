@@ -11,7 +11,7 @@ class MineStation;
 enum class StationState { IDLE, READY, UNLOADING };
 
 /// Enum to string mapping
-static std::unordered_map<StationState, const char*> STATION_STATE_NAME{
+inline std::unordered_map<StationState, const char*> STATION_STATE_NAME{
     {StationState::IDLE, "IDLE"},
     {StationState::READY, "READY"},
     {StationState::UNLOADING, "UNLOADING"}};

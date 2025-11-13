@@ -5,6 +5,9 @@
 namespace acme {
 class MineOverlord;
 ///
+void cleanupAssets();
+
+///
 std::string createISODateStamp();
 
 ///

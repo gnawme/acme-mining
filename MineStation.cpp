@@ -4,6 +4,7 @@
 #include "MineStationState.h"
 #include "MineTruck.h"
 
+#include <cassert>
 #include <cstddef>
 #include <fstream>
 #include <iostream>
@@ -27,6 +28,7 @@ MineStation::MineStation(const std::string& name)
 
 /// Removes a MineTruck from the queue
 MineTruck* MineStation::dequeue() {
+    assert(!_truckQueue.empty());
     auto* mineTruck = _truckQueue.front();
     _truckQueue.pop();
     --_placeInQueue;

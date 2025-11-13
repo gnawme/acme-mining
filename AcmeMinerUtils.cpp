@@ -16,6 +16,27 @@
 #include <string>
 
 namespace acme {
+/// Cleans up dynamically allocated assets
+void cleanupAssets() {
+    auto& registry = MineRegistry::getInstance();
+
+    auto truckDispatcher = registry.getTruckDispatcher();
+    for (auto* truck : truckDispatcher->truckGarage) {
+        delete truck;
+    }
+    truckDispatcher->truckGarage.clear();
+
+    auto stationDispatcher = registry.getStationDispatcher();
+    while (auto* station = stationDispatcher->getNextAvailableStation()) {
+        delete station;
+    }
+
+    auto siteDispatcher = registry.getSiteDispatcher();
+    while (auto* site = siteDispatcher->getNextAvailableMine()) {
+        delete site;
+    }
+}
+
 /// Creates an ISO date stamp for stats output files
 std::string createISODateStamp() {
     // Get the current time as a time_point

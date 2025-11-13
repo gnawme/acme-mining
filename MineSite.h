@@ -15,7 +15,7 @@ public:
     explicit MineSite(const std::string& name);
 
     MineSite() = delete;
-    ~MineSite() override = default;
+    ~MineSite() override;
 
     ///
     int getMiningDuration();

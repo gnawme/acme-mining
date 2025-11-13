@@ -4,6 +4,8 @@
 #include "MineSite.h"
 #include "MineStation.h"
 
+#include <cassert>
+
 namespace acme {
 /// Pushes a MineSite onto the (idle) queue
 /// \param mineSite
@@ -13,6 +15,7 @@ void SiteDispatcher::enqueue(MineSite* mineSite) {
 
 /// Gets an idle MineSite from the front of the queue
 MineSite* SiteDispatcher::getNextAvailableMine() {
+    assert(!_siteQueue.empty());
     auto* mineSite = _siteQueue.front();
     _siteQueue.pop();
     return mineSite;

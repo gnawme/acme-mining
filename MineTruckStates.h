@@ -12,7 +12,7 @@ class MineTruck;
 enum class TruckState { MINING, INBOUND, QUEUED, UNLOADING, OUTBOUND };
 
 /// Enum to string mapping
-static std::unordered_map<TruckState, const char*> TRUCK_STATE_NAME{
+inline std::unordered_map<TruckState, const char*> TRUCK_STATE_NAME{
     {TruckState::MINING, "MINING"},
     {TruckState::INBOUND, "INBOUND"},
     {TruckState::QUEUED, "QUEUED"},

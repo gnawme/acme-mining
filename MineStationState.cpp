@@ -45,7 +45,7 @@ void MineStationIdle::outputStatistics(std::ofstream& stationOutput) {
 }
 
 /// Updates the state with the context
-void MineStationIdle::update(const std::string& /*timestamp*/) {
+void MineStationIdle::update([[maybe_unused]] const std::string& timestamp) {
     ++_timeInState;
     if (_context.getQueueSize() != 0) {
         _context.setStationState(getNextState());

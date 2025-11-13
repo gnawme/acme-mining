@@ -14,7 +14,7 @@ int main(int argc, char** argv) {
     // Usage note if incorrect number of arguments
     if (argc != 3) {
         std::cerr << "Usage: acme-mining <number-of-trucks> <number-of-stations>" << std::endl;
-        EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
 
     // Process input
@@ -40,5 +40,7 @@ int main(int argc, char** argv) {
     // Run one simulation day, then output statistics
     overlord.run(numTrucks, numStations);
     overlord.outputStatistics();
-    EXIT_SUCCESS;
+
+    cleanupAssets();
+    return EXIT_SUCCESS;
 }

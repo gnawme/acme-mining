@@ -19,6 +19,8 @@ MineSite::MineSite(const std::string& name)
     , _timer(new MineTimer(H3_MINING_MIN, H3_MINING_MAX))
     , _duration((*_timer)()) {}
 
+MineSite::~MineSite() = default;
+
 /// Returns a random mining time for this visit
 int MineSite::getMiningDuration() {
     _duration = (*_timer)();
