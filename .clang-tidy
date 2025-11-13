@@ -1,3 +1,5 @@
+# clang-tidy configuration for ACME Mining Simulator
+#
 Checks: >
   -*,
   clang-analyzer-*,
@@ -8,12 +10,13 @@ Checks: >
   performance-*,
   bugprone-*,
   cppcoreguidelines-*,
+  concurrency-*,
+  cert-*,
   -clang-analyzer-nullability.NullablePassedToNonnull,
   -clang-analyzer-optin.cplusplus.VirtualCall,
   -clang-analyzer-optin.osx.*,
   -clang-analyzer-osx.*,
   -clang-analyzer-security.insecureAPI.rand,
-  -clang-analyzer-unix.Malloc,
   -misc-const-correctness,
   -misc-misplaced-const,
   -misc-no-recursion,
@@ -45,13 +48,15 @@ Checks: >
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-macro-usage,
   -cppcoreguidelines-non-private-member-variables-in-classes,
-  -cppcoreguidelines-owning-memory,
   -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
   -cppcoreguidelines-pro-bounds-constant-array-index,
   -cppcoreguidelines-pro-bounds-pointer-arithmetic,
   -cppcoreguidelines-pro-type-reinterpret-cast,
   -cppcoreguidelines-pro-type-union-access,
-  -cppcoreguidelines-avoid-non-const-global-variables,
+  -cert-dcl50-cpp,
+  -cert-dcl59-cpp,
+  -cert-err33-c,
+  -cert-err58-cpp,
 CheckOptions:
   - { key: readability-identifier-naming.ClassCase,           value: CamelCase }
   - { key: readability-identifier-naming.FunctionCase,        value: camelBack }

@@ -1,5 +1,7 @@
 # ACME Helium-3 Lunar Mining Operations Simulator
 
+[![Build](https://github.com/gnawme/acme-mining/actions/workflows/build.yml/badge.svg)](https://github.com/gnawme/acme-mining/actions/workflows/build.yml)
+
 ![ACME Mining Truck](docs/ACME%20Mining%20Truck.png)
 
 ### Introduction
