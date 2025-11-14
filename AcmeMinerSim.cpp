@@ -41,6 +41,5 @@ int main(int argc, char** argv) {
     overlord.run(numTrucks, numStations);
     overlord.outputStatistics();
 
-    cleanupAssets();
     return EXIT_SUCCESS;
 }
