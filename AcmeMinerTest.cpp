@@ -52,7 +52,6 @@ struct AcmeMinerTest : public ::testing::Test {
 };
 
 /// Tests MineTimer functionality
-/// \note   Will sometimes fail, because two random numbers will randomly be the same
 TEST_F(AcmeMinerTest, InstantiatingMineTimerWithDefaultValuesShouldWork) {
     auto* mineTimer = myMineTimer.get();
     auto duration1 = (*mineTimer)();
@@ -60,14 +59,12 @@ TEST_F(AcmeMinerTest, InstantiatingMineTimerWithDefaultValuesShouldWork) {
 
     auto duration2 = (*mineTimer)();
     EXPECT_TRUE(duration2 >= H3_MINING_MIN && duration2 <= H3_MINING_MAX);
-    EXPECT_NE(duration1, duration2);
 
     duration1 = (*mineTimer)();
     EXPECT_TRUE(duration1 >= H3_MINING_MIN && duration1 <= H3_MINING_MAX);
     for (auto i = 0; i < 10; ++i) {
         duration2 = (*mineTimer)();
         EXPECT_TRUE(duration2 >= H3_MINING_MIN && duration2 <= H3_MINING_MAX);
-        EXPECT_NE(duration1, duration2);
         duration1 = duration2;
     }
 }
