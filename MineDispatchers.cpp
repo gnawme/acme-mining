@@ -7,6 +7,33 @@
 #include <cassert>
 
 namespace acme {
+///
+std::shared_ptr<SiteDispatcher> MineRegistry::getSiteDispatcher() {
+    if (!_siteDispatcher) {
+        _siteDispatcher = std::make_shared<SiteDispatcher>();
+    }
+    return _siteDispatcher;
+}
+
+///
+std::shared_ptr<StationDispatcher> MineRegistry::getStationDispatcher() {
+    if (!_stationDispatcher) {
+        _stationDispatcher = std::make_shared<StationDispatcher>();
+    }
+    return _stationDispatcher;
+}
+
+///
+std::shared_ptr<TruckDispatcher> MineRegistry::getTruckDispatcher() {
+    if (!_truckDispatcher) {
+        _truckDispatcher = std::make_shared<TruckDispatcher>();
+    }
+    return _truckDispatcher;
+}
+
+///
+SiteDispatcher::~SiteDispatcher() = default;
+
 /// Pushes a MineSite onto the (idle) queue
 /// \param mineSite
 void SiteDispatcher::enqueue(MineSite* mineSite) {
@@ -21,6 +48,9 @@ MineSite* SiteDispatcher::getNextAvailableMine() {
     return mineSite;
 }
 
+///
+StationDispatcher::~StationDispatcher() = default;
+
 /// Pushes a MineStation and resorts the priority queue
 /// \param mineStation
 void StationDispatcher::enqueue(MineStation* mineStation) {
@@ -33,4 +63,7 @@ MineStation* StationDispatcher::getNextAvailableStation() {
     _stationQueue.pop();
     return mineStation;
 }
+
+
+TruckDispatcher::~TruckDispatcher() = default;
 }  // namespace acme

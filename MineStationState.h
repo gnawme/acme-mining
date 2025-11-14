@@ -2,6 +2,7 @@
 #pragma once
 #include <iosfwd>
 #include <memory>
+#include <string>
 #include <unordered_map>
 
 namespace acme {
@@ -137,5 +138,6 @@ private:
     MineStation& _context;
     int _duration{0};
     int _timeInState{0};
+    std::string _currentTruckName;
 };
 }  // namespace acme

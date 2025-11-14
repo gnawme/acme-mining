@@ -16,7 +16,7 @@ public:
     explicit MineTruck(const std::string& name);
 
     MineTruck() = delete;
-    ~MineTruck() override = default;
+    ~MineTruck() override;
 
     ///
     void assignMineSite(MineSite*);

@@ -26,6 +26,9 @@ MineTruck::MineTruck(const std::string& name)
     _currentState = _truckStates[TruckState::MINING].get();
 }
 
+///
+MineTruck::~MineTruck() = default;
+
 /// Assigns a MineSite
 /// \param mineSite
 void MineTruck::assignMineSite(MineSite* mineSite) {

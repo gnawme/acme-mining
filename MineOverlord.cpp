@@ -35,7 +35,7 @@ void MineOverlord::outputStatistics() {
     }
 
     auto truckDispatcher = MineRegistry::getInstance().getTruckDispatcher();
-    for (auto* truck : truckDispatcher->truckGarage) {
+    for (const auto& truck : truckDispatcher->truckGarage) {
         truck->outputStationVisits(timestamp);
     }
 }

@@ -12,6 +12,7 @@
 #include <ctime>
 #include <iomanip>
 #include <iostream>
+#include <memory>
 #include <sstream>
 #include <string>
 
@@ -51,9 +52,13 @@ void instantiateSites(MineOverlord& overlord, int numSites) {
     for (auto site = 0; site < numSites; ++site) {
         constexpr char SITE_PREFIX[]{"ASIT"};
         auto name = genMinionName(SITE_PREFIX, site);
-        auto* miningSite = new MineSite(name);
-        overlord.attach(miningSite);
-        siteDispatcher->enqueue(miningSite);
+        auto miningSite = std::make_unique<MineSite>(name);
+
+        auto* miningSitePtr = miningSite.get();
+        overlord.attach(miningSitePtr);
+        siteDispatcher->enqueue(miningSitePtr);
+
+        siteDispatcher->siteRegistry.push_back(std::move(miningSite));
     }
 }
 
@@ -65,9 +70,13 @@ void instantiateStations(MineOverlord& overlord, int numStations) {
     for (auto station = 0; station < numStations; ++station) {
         constexpr char STATION_PREFIX[]{"ASTN"};
         auto name = genMinionName(STATION_PREFIX, station);
-        auto* miningStation = new MineStation(name);
-        overlord.attach(miningStation);
-        stationDispatcher->enqueue(miningStation);
+        auto miningStation = std::make_unique<MineStation>(name);
+
+        auto* miningStationPtr = miningStation.get();
+        overlord.attach(miningStationPtr);
+        stationDispatcher->enqueue(miningStationPtr);
+
+        stationDispatcher->stationDepot.push_back(std::move(miningStation));
     }
 }
 
@@ -79,9 +88,9 @@ void instantiateTrucks(MineOverlord& overlord, int numTrucks) {
     for (auto truck = 0; truck < numTrucks; ++truck) {
         constexpr char TRUCK_PREFIX[]{"ATRK"};
         auto name = genMinionName(TRUCK_PREFIX, truck);
-        auto* miningTruck = new MineTruck(name);
-        overlord.attach(miningTruck);
-        truckDispatcher->truckGarage.push_back(miningTruck);
+        auto miningTruck = std::make_unique<MineTruck>(name);
+        overlord.attach(miningTruck.get());
+        truckDispatcher->truckGarage.push_back(std::move(miningTruck));
     }
 }
 
@@ -90,7 +99,7 @@ void startTrucksAtMines() {
     auto siteDispatcher = MineRegistry::getInstance().getSiteDispatcher();
     auto truckDispatcher = MineRegistry::getInstance().getTruckDispatcher();
 
-    for (auto* truck : truckDispatcher->truckGarage) {
+    for (const auto& truck : truckDispatcher->truckGarage) {
         truck->assignMineSite(siteDispatcher->getNextAvailableMine());
         truck->setTruckState(TruckState::MINING);
     }

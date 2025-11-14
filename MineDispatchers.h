@@ -2,23 +2,26 @@
 /// \brief  Dispatcher classes and their object registry
 #pragma once
 #include "MineStation.h"
+#include "MineTruck.h"
 
 #include <memory>
 #include <queue>
 
 namespace acme {
 class MineSite;
-class MineTruck;
 ///
 class SiteDispatcher {
 public:
     SiteDispatcher() = default;
+    ~SiteDispatcher();
 
     ///
     void enqueue(MineSite* mineSite);
 
     ///
     MineSite* getNextAvailableMine();
+
+    std::vector<std::unique_ptr<MineSite>> siteRegistry;
 
 private:
     std::queue<MineSite*> _siteQueue;
@@ -36,12 +39,15 @@ struct CompareQueueSize {
 class StationDispatcher {
 public:
     StationDispatcher() = default;
+    ~StationDispatcher();
 
     ///
     void enqueue(MineStation*);
 
     ///
     MineStation* getNextAvailableStation();
+
+    std::vector<std::unique_ptr<MineStation>> stationDepot;
 
 private:
     std::priority_queue<MineStation*, std::vector<MineStation*>, CompareQueueSize> _stationQueue;
@@ -51,9 +57,11 @@ private:
 class TruckDispatcher {
 public:
     TruckDispatcher() = default;
+    ~TruckDispatcher();
+
 
     /// \note   Allows direct application access
-    std::vector<MineTruck*> truckGarage;
+    std::vector<std::unique_ptr<MineTruck>> truckGarage;
 };
 
 ///
@@ -70,28 +78,13 @@ public:
     MineRegistry& operator=(const MineRegistry&) = delete;
 
     ///
-    std::shared_ptr<SiteDispatcher> getSiteDispatcher() {
-        if (!_siteDispatcher) {
-            _siteDispatcher = std::make_shared<SiteDispatcher>();
-        }
-        return _siteDispatcher;
-    }
+    std::shared_ptr<SiteDispatcher> getSiteDispatcher();
 
     ///
-    std::shared_ptr<StationDispatcher> getStationDispatcher() {
-        if (!_stationDispatcher) {
-            _stationDispatcher = std::make_shared<StationDispatcher>();
-        }
-        return _stationDispatcher;
-    }
+    std::shared_ptr<StationDispatcher> getStationDispatcher();
 
     ///
-    std::shared_ptr<TruckDispatcher> getTruckDispatcher() {
-        if (!_truckDispatcher) {
-            _truckDispatcher = std::make_shared<TruckDispatcher>();
-        }
-        return _truckDispatcher;
-    }
+    std::shared_ptr<TruckDispatcher> getTruckDispatcher();
 
 private:
     MineRegistry() = default;

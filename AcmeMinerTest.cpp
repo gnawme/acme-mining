@@ -11,6 +11,8 @@
 
 #include <gtest/gtest.h>
 
+#include <memory>
+
 
 using namespace acme;
 
@@ -18,64 +20,52 @@ using namespace acme;
 struct AcmeMinerTest : public ::testing::Test {
     ///
     void SetUp() override {
-        myMineTimer = new MineTimer(H3_MINING_MIN, H3_MINING_MAX);
+        myMineTimer = std::make_unique<MineTimer>(H3_MINING_MIN, H3_MINING_MAX);
 
-        myMineTruckA = new MineTruck("ATRK-00000A");
-        myMineTruckB = new MineTruck("ATRK-00000B");
-        myMineTruckC = new MineTruck("ATRK-00000C");
+        myMineTruckA = std::make_unique<MineTruck>("ATRK-00000A");
+        myMineTruckB = std::make_unique<MineTruck>("ATRK-00000B");
+        myMineTruckC = std::make_unique<MineTruck>("ATRK-00000C");
 
-        myMineStation1 = new MineStation("ASTN-000001");
-        myMineStation2 = new MineStation("ASTN-000002");
+        myMineStation1 = std::make_unique<MineStation>("ASTN-000001");
+        myMineStation2 = std::make_unique<MineStation>("ASTN-000002");
 
-        myMineSiteA = new MineSite("ASIT-00000A");
-        myMineSiteB = new MineSite("ASIT-00000B");
-        myMineSiteC = new MineSite("ASIT-00000C");
+        myMineSiteA = std::make_unique<MineSite>("ASIT-00000A");
+        myMineSiteB = std::make_unique<MineSite>("ASIT-00000B");
+        myMineSiteC = std::make_unique<MineSite>("ASIT-00000C");
     }
 
     ///
-    void TearDown() override {
-        delete myMineTimer;
+    void TearDown() override {}
 
-        delete myMineTruckA;
-        delete myMineTruckB;
-        delete myMineTruckC;
+    std::unique_ptr<MineTimer> myMineTimer;
 
-        delete myMineStation1;
-        delete myMineStation2;
+    std::unique_ptr<MineTruck> myMineTruckA;
+    std::unique_ptr<MineTruck> myMineTruckB;
+    std::unique_ptr<MineTruck> myMineTruckC;
 
-        delete myMineSiteA;
-        delete myMineSiteB;
-        delete myMineSiteC;
-    }
+    std::unique_ptr<MineStation> myMineStation1;
+    std::unique_ptr<MineStation> myMineStation2;
 
-    MineTimer* myMineTimer{nullptr};
-
-    MineTruck* myMineTruckA{nullptr};
-    MineTruck* myMineTruckB{nullptr};
-    MineTruck* myMineTruckC{nullptr};
-
-    MineStation* myMineStation1{nullptr};
-    MineStation* myMineStation2{nullptr};
-
-    MineSite* myMineSiteA{nullptr};
-    MineSite* myMineSiteB{nullptr};
-    MineSite* myMineSiteC{nullptr};
+    std::unique_ptr<MineSite> myMineSiteA;
+    std::unique_ptr<MineSite> myMineSiteB;
+    std::unique_ptr<MineSite> myMineSiteC;
 };
 
 /// Tests MineTimer functionality
 /// \note   Will sometimes fail, because two random numbers will randomly be the same
 TEST_F(AcmeMinerTest, InstantiatingMineTimerWithDefaultValuesShouldWork) {
-    auto duration1 = (*myMineTimer)();
+    auto* mineTimer = myMineTimer.get();
+    auto duration1 = (*mineTimer)();
     EXPECT_TRUE(duration1 >= H3_MINING_MIN && duration1 <= H3_MINING_MAX);
 
-    auto duration2 = (*myMineTimer)();
+    auto duration2 = (*mineTimer)();
     EXPECT_TRUE(duration2 >= H3_MINING_MIN && duration2 <= H3_MINING_MAX);
     EXPECT_NE(duration1, duration2);
 
-    duration1 = (*myMineTimer)();
+    duration1 = (*mineTimer)();
     EXPECT_TRUE(duration1 >= H3_MINING_MIN && duration1 <= H3_MINING_MAX);
     for (auto i = 0; i < 10; ++i) {
-        duration2 = (*myMineTimer)();
+        duration2 = (*mineTimer)();
         EXPECT_TRUE(duration2 >= H3_MINING_MIN && duration2 <= H3_MINING_MAX);
         EXPECT_NE(duration1, duration2);
         duration1 = duration2;
@@ -84,77 +74,86 @@ TEST_F(AcmeMinerTest, InstantiatingMineTimerWithDefaultValuesShouldWork) {
 
 /// Tests that the MineStation min heap works properly
 TEST_F(AcmeMinerTest, StationDispatcherQueuesShouldWorkAsExpected) {
-    myMineStation1->enqueue(myMineTruckA);
-    myMineStation1->enqueue(myMineTruckB);
+    auto* mineStation1 = myMineStation1.get();
+    mineStation1->enqueue(myMineTruckA.get());
+    mineStation1->enqueue(myMineTruckB.get());
 
-    myMineStation2->enqueue(myMineTruckC);
+    auto* mineStation2 = myMineStation2.get();
+    mineStation2->enqueue(myMineTruckC.get());
 
     auto stationDispatcher = MineRegistry::getInstance().getStationDispatcher();
-    stationDispatcher->enqueue(myMineStation1);
-    stationDispatcher->enqueue(myMineStation2);
+    stationDispatcher->enqueue(mineStation1);
+    stationDispatcher->enqueue(mineStation2);
 
     // Station2 has the smaller queue, should be the one returned
     auto* availableStation = stationDispatcher->getNextAvailableStation();
-    EXPECT_EQ(myMineStation2->getName(), availableStation->getName());
+    EXPECT_EQ(mineStation2->getName(), availableStation->getName());
 
-    auto* truckA = myMineStation1->dequeue();
-    stationDispatcher->enqueue(myMineStation1);
+    auto* truckA = mineStation1->dequeue();
+    stationDispatcher->enqueue(mineStation1);
 
-    myMineStation2->enqueue(truckA);
-    stationDispatcher->enqueue(myMineStation1);
+    mineStation2->enqueue(truckA);
+    stationDispatcher->enqueue(mineStation1);
 
     // Station 1 now has the smaller queue, should be the one returned
     availableStation = stationDispatcher->getNextAvailableStation();
-    EXPECT_EQ(myMineStation1->getName(), availableStation->getName());
+    EXPECT_EQ(mineStation1->getName(), availableStation->getName());
 }
 
 /// Tests that the MineSite queue works properly
 TEST_F(AcmeMinerTest, SiteDispatcherShouldWorkAsExpected) {
-    auto duration = myMineSiteA->getMiningDuration();
+    auto* mineSiteA = myMineSiteA.get();
+    auto duration = mineSiteA->getMiningDuration();
     EXPECT_TRUE(duration >= H3_MINING_MIN && duration <= H3_MINING_MAX);
     auto siteDispatcher = MineRegistry::getInstance().getSiteDispatcher();
-    siteDispatcher->enqueue(myMineSiteA);
-    siteDispatcher->enqueue(myMineSiteB);
-    siteDispatcher->enqueue(myMineSiteC);
-
-    auto* mineSiteA = siteDispatcher->getNextAvailableMine();
-    auto* mineSiteB = siteDispatcher->getNextAvailableMine();
     siteDispatcher->enqueue(mineSiteA);
+
+    auto* mineSiteB = myMineSiteB.get();
     siteDispatcher->enqueue(mineSiteB);
 
-    auto* mineSiteC = siteDispatcher->getNextAvailableMine();
-    EXPECT_EQ(mineSiteC->getName(), myMineSiteC->getName());
+    auto* mineSiteC = myMineSiteC.get();
+    siteDispatcher->enqueue(mineSiteC);
+
+    auto* mineSiteAvailA = siteDispatcher->getNextAvailableMine();
+    auto* mineSiteAvailB = siteDispatcher->getNextAvailableMine();
+    siteDispatcher->enqueue(mineSiteAvailA);
+    siteDispatcher->enqueue(mineSiteAvailB);
+
+    auto* mineSiteAvailC = siteDispatcher->getNextAvailableMine();
+    EXPECT_EQ(mineSiteAvailC->getName(), mineSiteC->getName());
 }
 
 ///
 TEST_F(AcmeMinerTest, MineStationStateTransitionsShouldWorkAsExpected) {
-    EXPECT_EQ(myMineStation1->getState(), StationState::IDLE);
+    auto* mineStation1 = myMineStation1.get();
+    EXPECT_EQ(mineStation1->getState(), StationState::IDLE);
     auto stationDispatcher = MineRegistry::getInstance().getStationDispatcher();
-    stationDispatcher->enqueue(myMineStation1);
+    stationDispatcher->enqueue(mineStation1);
 
     // Place a MineTruck in the MineStation queue
-    myMineTruckA->assignMineSite(myMineSiteA);
-    myMineTruckA->setTruckState(TruckState::INBOUND);
-    EXPECT_TRUE(myMineStation1->getQueueSize() != 0);
+    auto* mineTruckA = myMineTruckA.get();
+    mineTruckA->assignMineSite(myMineSiteA.get());
+    mineTruckA->setTruckState(TruckState::INBOUND);
+    EXPECT_TRUE(mineStation1->getQueueSize() != 0);
 
     auto tick = 1;
     std::string timestamp = tickToTimestamp(tick);
-    myMineTruckA->update(timestamp);
-    myMineStation1->update(timestamp);
-    EXPECT_EQ(myMineStation1->getState(), StationState::READY);
+    mineTruckA->update(timestamp);
+    mineStation1->update(timestamp);
+    EXPECT_EQ(mineStation1->getState(), StationState::READY);
 
     for (auto i = 1; i < TRUCK_TRANSIT_TIME; ++i) {
         ++tick;
         timestamp = tickToTimestamp(tick);
-        myMineTruckA->update(timestamp);
-        myMineStation1->update(timestamp);
+        mineTruckA->update(timestamp);
+        mineStation1->update(timestamp);
     }
 
-    EXPECT_EQ(myMineStation1->getState(), StationState::UNLOADING);
+    EXPECT_EQ(mineStation1->getState(), StationState::UNLOADING);
 
     ++tick;
     timestamp = tickToTimestamp(tick);
-    myMineTruckA->update(timestamp);
-    myMineStation1->update(timestamp);
-    EXPECT_EQ(myMineStation1->getState(), StationState::READY);
+    mineTruckA->update(timestamp);
+    mineStation1->update(timestamp);
+    EXPECT_EQ(mineStation1->getState(), StationState::READY);
 }

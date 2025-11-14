@@ -109,6 +109,9 @@ MineStationUnloading::MineStationUnloading(MineStation& context)
 /// \param duration
 void MineStationUnloading::enterState() {
     _duration = TRUCK_UNLOADING_TIME;
+    if (_context.getQueueSize() > 0) {
+        _currentTruckName = _context.front()->getName();
+    }
 }
 
 ///
@@ -139,7 +142,7 @@ void MineStationUnloading::update(const std::string& timestamp) {
     if (_duration == 0) {
         std::ostringstream oss;
         oss << timestamp << " : Station ";
-        oss << _context.getName() << " UNLOADING " << _context.getName();
+        oss << _context.getName() << " UNLOADING " << _currentTruckName;
         oss << ", " << _context.getQueueSize() << " left in queue";
         MineLogger::getInstance().logMessage(oss.str());
         _context.setStationState(getNextState());
